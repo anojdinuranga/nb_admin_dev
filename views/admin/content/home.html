@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Home Content</title>
+    <!-- Header Link File Start -->
+    <%-header_tags %>
+        <!-- Header Link File End -->
+</head>
+
+<body class="nav-fixed">
+
+    <!-- Header Div Start -->
+    <%-top_header %>
+        <!-- Header Div End -->
+
+        <!-- Body Content Div Start -->
+        <div id="layoutSidenav">
+
+            <!-- Side-Menu Div Start -->
+            <%-sidebar %>
+                <!-- Side-Menu Div End -->
+
+                <!-- Body-Content Div Start -->
+                <div id="layoutSidenav_content">
+                    <main>
+                        <!-- Page Title Div Start -->
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Home Content
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Change home contents</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Page Title Div End -->
+
+                        <!-- New arrivals product section 1 / Card 1 Start-->
+                        <div class="container">
+
+                            <ol class="breadcrumb mb-0 mt-4">
+                                <li class="breadcrumb-item"><a href="/event-management">New arrivals product section
+                                        1</a></li>
+                                <li class="breadcrumb-item active">Card 1</li>
+                            </ol>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Path</label>
+
+                                            <input type="text" class="form-control" placeholder="Path" id="path1" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control" placeholder="Title" id="title1" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <div class="col-12">
+                                            <button onclick="save_new_arrival_and_product_card(1)"
+                                                class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <!-- Feature image -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Image</h5>
+                                            <div id="imageContainer1" class="border-radius-20 image-uploader-container"
+                                                onclick="openImageInput(1)">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/Product-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: AVIF</p>
+                                                </div>
+                                            </div>
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="image1" accept="image/*" class="d-none"
+                                                onchange="displayImage(1)">
+                                            <!-- Input Field Div End -->
+                                        </div>
+                                    </div>
+                                    <!-- Feature image -->
+                                </div>
+                            </div>
+                        </div>
+                        <!--  New arrivals product section 1 / Card 1 End-->
+
+                        <!-- New arrivals product section 1 / Card 2 Start-->
+                        <div class="container">
+
+                            <ol class="breadcrumb mb-0 mt-4">
+                                <li class="breadcrumb-item"><a href="/event-management">New arrivals product section
+                                        1</a></li>
+                                <li class="breadcrumb-item active">Card 2</li>
+                            </ol>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Path</label>
+
+                                            <input type="text" class="form-control" placeholder="Path" id="path2" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Title</label>
+
+                                            <input type="text" class="form-control" placeholder="Title" id="title2" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <div class="col-12">
+                                            <button onclick="save_new_arrival_and_product_card(2)"
+                                                class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <!-- Feature image -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Image</h5>
+                                            <div id="imageContainer2" class="border-radius-20 image-uploader-container"
+                                                onclick="openImageInput(2)">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/Product-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: AVIF</p>
+                                                </div>
+                                            </div>
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="image2" accept="image/*" class="d-none"
+                                                onchange="displayImage(2)">
+                                            <!-- Input Field Div End -->
+                                        </div>
+                                    </div>
+                                    <!-- Feature image -->
+                                </div>
+                            </div>
+                        </div>
+                        <!--  New arrivals product section 1 / Card 2 End-->
+
+                        <!-- New arrivals product section 2 / Card 1 Start-->
+                        <div class="container">
+
+                            <ol class="breadcrumb mb-0 mt-4">
+                                <li class="breadcrumb-item"><a href="/event-management">New arrivals product section
+                                        2</a></li>
+                                <li class="breadcrumb-item active">Card 1</li>
+                            </ol>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Path</label>
+
+                                            <input type="text" class="form-control" placeholder="Path" id="path3" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Title</label>
+
+                                            <input type="text" class="form-control" placeholder="Title" id="title3" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <div class="col-12">
+                                            <button onclick="save_new_arrival_and_product_card(3)"
+                                                class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <!-- Feature image -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Image</h5>
+                                            <div id="imageContainer3" class="border-radius-20 image-uploader-container"
+                                                onclick="openImageInput(3)">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/Product-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: AVIF</p>
+                                                </div>
+                                            </div>
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="image3" accept="image/*" class="d-none"
+                                                onchange="displayImage(3)">
+                                            <!-- Input Field Div End -->
+                                        </div>
+                                    </div>
+                                    <!-- Feature image -->
+                                </div>
+                            </div>
+                        </div>
+                        <!--  New arrivals product section 2 / Card 1 End-->
+
+                        <!-- New arrivals product section 2 / Card 2 Start-->
+                        <div class="container">
+
+                            <ol class="breadcrumb mb-0 mt-4">
+                                <li class="breadcrumb-item"><a href="/event-management">New arrivals product section
+                                        2</a></li>
+                                <li class="breadcrumb-item active">Card 2</li>
+                            </ol>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Path</label>
+
+                                            <input type="text" class="form-control" placeholder="Path" id="path4" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Title</label>
+
+                                            <input type="text" class="form-control" placeholder="Title" id="title4" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <div class="col-12">
+                                            <button onclick="save_new_arrival_and_product_card(4)"
+                                                class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <!-- Feature image -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Image</h5>
+                                            <div id="imageContainer4" class="border-radius-20 image-uploader-container"
+                                                onclick="openImageInput(4)">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/Product-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: AVIF</p>
+                                                </div>
+                                            </div>
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="image4" accept="image/*" class="d-none"
+                                                onchange="displayImage(4)">
+                                            <!-- Input Field Div End -->
+                                        </div>
+                                    </div>
+                                    <!-- Feature image -->
+                                </div>
+                            </div>
+                        </div>
+                        <!--  New arrivals product section 2 / Card 2 End-->
+
+
+                        <!-- site content brand video Start-->
+                        <div class="container">
+
+                            <ol class="breadcrumb mb-0 mt-4">
+                                <li class="breadcrumb-item"><a href="/event-management">Site content brand video section
+                                    </a></li>
+                                <li class="breadcrumb-item active">Content</li>
+                            </ol>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Description</label>
+
+                                            <input type="text" class="form-control" placeholder="Description"
+                                                id="brand_video_section_description" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">video link</label>
+
+                                            <input type="text" class="form-control" placeholder="video link"
+                                                id="brand_video_section_view_link" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <div class="col-12">
+                                            <button onclick="save_brand_video_section_content()"
+                                                class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <!-- Feature image -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Image</h5>
+                                            <div id="imageContainer5" class="border-radius-20 image-uploader-container"
+                                                onclick="openImageInput(5)">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/Product-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: AVIF</p>
+                                                </div>
+                                            </div>
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="image5" accept="image/*" class="d-none"
+                                                onchange="displayImage(5)">
+                                            <!-- Input Field Div End -->
+                                        </div>
+                                    </div>
+                                    <!-- Feature image -->
+                                </div>
+                            </div>
+                        </div>
+                        <!--  site content brand video End-->
+
+
+
+                        <!-- Live show section Start-->
+                        <div class="container mb-5">
+
+                            <ol class="breadcrumb mb-0 mt-4">
+                                <li class="breadcrumb-item"><a href="/event-management">Live show section </a></li>
+                                <li class="breadcrumb-item active">Content</li>
+                            </ol>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Event Name</label>
+
+                                            <input type="text" class="form-control" placeholder="Event Name"
+                                                id="event_name" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Live Url</label>
+
+                                            <input type="text" class="form-control" placeholder="Live Url"
+                                                id="live_url" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Starting At</label>
+
+                                            <input type="text" class="form-control" placeholder="Starting At"
+                                                id="startingAt" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <div class="col-12">
+                                            <button onclick="save_live_event_section_content()"
+                                                class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <!-- Feature image -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Image</h5>
+                                            <div id="imageContainer6" class="border-radius-20 image-uploader-container"
+                                                onclick="openImageInput(6)">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/Product-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: AVIF</p>
+                                                </div>
+                                            </div>
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="image6" accept="image/*" class="d-none"
+                                                onchange="displayImage(6)">
+                                            <!-- Input Field Div End -->
+                                        </div>
+                                    </div>
+                                    <!-- Feature image -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Live show section End-->
+                    </main>
+
+
+                </div>
+                <!-- Body-Content Div End -->
+        </div>
+        <!-- Body Content Div End -->
+
+
+        <!-- Script Tag Start -->
+        <%- script_tags %>
+            <!-- Script Tag End -->
+
+            <script>
+
+                function openImageInput(id) {
+                    var input = document.getElementById('image' + id);
+                    input.click();
+                }
+
+                function displayImage(id) {
+                    const input = document.getElementById('image' + id);
+                    const container = document.getElementById('imageContainer' + id);
+
+                    const file = input.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            const image = new Image();
+                            image.src = e.target.result;
+                            image.className = "previewImage";
+                            container.innerHTML = '';
+
+                            image.style.width = '100%';
+                            image.style.height = '100%';
+
+                            container.appendChild(image);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                }
+
+                function dataView() {
+                    $.ajax({
+                        url: '/api/v1/content/all',
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                // new_arrivals_product_list
+                                for (var i = 1; i < data.data.new_arrivals_product_list.length + 1; i++) {
+                                    document.getElementById("title" + i).value = data.data.new_arrivals_product_list[i - 1].title;
+                                    document.getElementById("path" + i).value = data.data.new_arrivals_product_list[i - 1].path;
+                                    const container = document.getElementById('imageContainer' + i);
+                                    const image = new Image();
+                                    image.src = data.data.new_arrivals_product_list[i - 1].image_url;
+                                    image.className = "previewImage";
+                                    container.innerHTML = '';
+
+                                    image.style.width = '100%';
+                                    image.style.height = '100%';
+
+                                    container.appendChild(image);
+                                }
+                                // site_content_live_show_view
+                                document.getElementById("live_url").value = data.data.site_content_live_show_view.live_url;
+                                document.getElementById("event_name").value = data.data.site_content_live_show_view.event_name;
+                                document.getElementById("startingAt").value = data.data.site_content_live_show_view.starting_at;
+                                const container = document.getElementById('imageContainer6');
+                                const image = new Image();
+                                image.src = data.data.site_content_live_show_view.image_url;
+                                image.className = "previewImage";
+                                container.innerHTML = '';
+                                image.style.width = '100%';
+                                image.style.height = '100%';
+                                container.appendChild(image);
+                                // site_content_brand_video_view
+                                document.getElementById("brand_video_section_description").value = data.data.site_content_brand_video_view.description;
+                                document.getElementById("brand_video_section_view_link").value = data.data.site_content_brand_video_view.view_link;
+                                const container2 = document.getElementById('imageContainer5');
+                                const image2 = new Image();
+                                image2.src = data.data.site_content_brand_video_view.image_url;
+                                image2.className = "previewImage";
+                                container2.innerHTML = '';
+                                image2.style.width = '100%';
+                                image2.style.height = '100%';
+                                container2.appendChild(image2);
+                            } else {
+                                console.log(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                dataView()
+
+
+                function save_new_arrival_and_product_card(id) {
+
+                    $.ajax({
+                        url: '/api/v1/content/new-arrivals-product/edit',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+
+                            "title": $('#title' + id).val(),
+                            "path": $('#path' + id).val(),
+                            "id": id
+
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+
+                                save_new_arrival_and_product_card_image_change(id);
+
+                            } else {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                function save_brand_video_section_content() {
+
+                    $.ajax({
+                        url: '/api/v1/content/brand-video/edit',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+
+                            "description": $('#brand_video_section_description').val(),
+                            "viewLink": $('#brand_video_section_view_link').val(),
+                            "id": 1
+
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+
+                                brand_video_section_image_change(1);
+
+                            } else {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                function save_live_event_section_content() {
+
+                    $.ajax({
+                        url: '/api/v1/content/live-show/edit',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+
+                            "liveUrl": $('#live_url').val(),
+                            "eventName": $('#event_name').val(),
+                            "startingAt": $('#startingAt').val(),
+                            "id": 1
+
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+
+                                live_event_section_image_change(1);
+
+                            } else {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+
+
+
+                async function save_new_arrival_and_product_card_image_change(id) {
+
+                    if (document.getElementById("image" + id).files.length === 0) {
+                        return;
+                    }
+
+                    let data = new FormData();
+                    data.append("imageId", 4);
+                    data.append("resultId", id);
+                    data.append("image", document.getElementById("image" + id).files[0]);
+
+                    $.ajax({
+                        url: "/api/upload",
+                        data: data,
+                        method: "post",
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+
+                            var data = JSON.parse(data);
+                            if (data.status == "true" || data.status == true) {
+
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'Done',
+                                    message: "Success",
+                                });
+
+                            } else {
+                                iziToast.error({
+                                    timeout: 5000,
+                                    icon: 'fa fa-ban',
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+
+
+                            }
+                        },
+                        error: function () {
+                            alert("Can not post data");
+                        }
+                    });
+
+                }
+                async function brand_video_section_image_change(id) {
+
+                    if (document.getElementById("image5").files.length === 0) {
+                        return;
+                    }
+
+                    let data = new FormData();
+                    data.append("imageId", 5);
+                    data.append("resultId", id);
+                    data.append("image", document.getElementById("image5").files[0]);
+
+                    $.ajax({
+                        url: "/api/upload",
+                        data: data,
+                        method: "post",
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+
+                            var data = JSON.parse(data);
+                            if (data.status == "true" || data.status == true) {
+
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'Done',
+                                    message: "Success",
+                                });
+
+                            } else {
+                                iziToast.error({
+                                    timeout: 5000,
+                                    icon: 'fa fa-ban',
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+
+
+                            }
+                        },
+                        error: function () {
+                            alert("Can not post data");
+                        }
+                    });
+
+                }
+                async function live_event_section_image_change(id) {
+
+                    if (document.getElementById("image6").files.length === 0) {
+                        return;
+                    }
+
+                    let data = new FormData();
+                    data.append("imageId", 6);
+                    data.append("resultId", id);
+                    data.append("image", document.getElementById("image6").files[0]);
+
+                    $.ajax({
+                        url: "/api/upload",
+                        data: data,
+                        method: "post",
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+
+                            var data = JSON.parse(data);
+                            if (data.status == "true" || data.status == true) {
+
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'Done',
+                                    message: "Success",
+                                });
+
+                            } else {
+                                iziToast.error({
+                                    timeout: 5000,
+                                    icon: 'fa fa-ban',
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+
+
+                            }
+                        },
+                        error: function () {
+                            alert("Can not post data");
+                        }
+                    });
+
+                }
+
+
+
+            </script>
+
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Category Management</title>
+    <%-header_tags %>
+</head>
+
+<body class="nav-fixed">
+    <%-top_header %>
+        <div id="layoutSidenav">
+            <%-sidebar %>
+                <div id="layoutSidenav_content">
+                    <main>
+
+                        <!-- Title Div Start -->
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Category Management
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Add New Sub Category</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb mb-0 mt-4">
+                                        <li class="breadcrumb-item"><a href="/gift-voucher">Category Management</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Add New Sub Category</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Title Div End -->
+
+                        <!-- Main page content Start-->
+                        <div class="container">
+                            <div class="">
+                                <div class="row mb-5">
+
+                                    <div class="col-12">
+                                        <div class="row">
+
+                                            <!-- Product Category Select Div Start -->
+                                            <div class="col-12 mb-3">
+                                                <label class="form-label">Product Category</label>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="productCategory"></select>
+                                                </div>
+                                            </div>
+                                            <!-- Product Category Select Div End -->
+
+                                            <!-- Sub Category Select Div Start -->
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Sub Category Name</label>
+                                                <div class="form-group">
+                                                    <input min="0" class="form-control" id="subCategoryName"
+                                                        type="text">
+                                                </div>
+                                            </div>
+                                            <!-- Sub Category Select Div Start -->
+
+
+                                            <!-- Button Div Start -->
+                                            <div class="col-12 d-flex justify-content-end mb-3">
+                                                <button class="btn btn-primary" onclick="subCategoryAdd();">Add</button>
+                                            </div>
+                                            <!-- Button Div Start -->
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Main page content End-->
+
+                    </main>
+                    <footer class="footer mt-auto footer-light">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 small">Copyright &copy; NB Admin 2023</div>
+                                <div class="col-md-6 text-md-right small">
+                                    <a href="#!">Privacy Policy</a>
+                                    &middot;
+                                    <a href="#!">Terms &amp; Conditions</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+        </div>
+        <%- script_tags %>
+
+            <script>
+                // Product Add Function Start
+                function subCategoryAdd() {
+
+                    $.ajax({
+                        url: '/api/v1/product_sub_category/add',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+
+                            "name": $('#subCategoryName').val(),
+                            "category": $('#productCategory').val(),
+                            "imgUrl": "sample url",
+
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+                                
+                                setTimeout(()=> {location.href = "/sub-category-edit/"+data.data.insertId}, 1000);
+
+                            } else {
+
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+
+                }
+                // Product Add Function End
+
+
+                // product Category List Load Function Start
+                function productCategory() {
+                    $.ajax({
+                        url: '/api/v1/product_category/list',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {},
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+                                console.log(data);
+
+                                let details = data.data;
+
+                                details.forEach(function (detail) {
+
+                                    let option = document.createElement('option');
+                                    option.value = detail.id;
+                                    option.textContent = detail.name;
+                                    document.getElementById('productCategory').appendChild(option);
+
+
+                                });
+
+                            } else {
+                                console.log(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                productCategory();
+                // product Category List Load Function End
+
+
+            </script>
+</body>
+
+</html>

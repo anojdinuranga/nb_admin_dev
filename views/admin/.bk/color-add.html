@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Color Add</title>
+    <%-header_tags %>
+</head>
+
+<body class="nav-fixed">
+    <%-top_header %>
+        <div id="layoutSidenav">
+            <%-sidebar %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Color Management
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Create Color</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb mb-0 mt-4">
+                                        <li class="breadcrumb-item"><a href="/">Color Management</a></li>
+                                        <li class="breadcrumb-item active">Create Color</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Main page content-->
+                        <div class="container">
+                            <div class="">
+                                <div class="row">
+                                    <div class="col d-flex justify-content-end">
+                                        <button class="btn btn-primary">Create Color</button>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <!-- Ticket Category Name Enter Div Start -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Color Name</label>
+                                        <input type="text" class="form-control" placeholder="Ticket Category"
+                                            id="ticketCategoryViewName" />
+                                    </div>
+                                    <!-- Ticket Category Name Enter Div End -->
+
+                                    <!-- Color Code And Name Enter Div Start -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Color Name</label>
+                                        <div class="d-flex gap-4">
+                                            <input type="text" class="form-control" placeholder="Color Name"
+                                                id="ticketCategoryViewColorName" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 form-group">
+                                        <label for="exampleFormControlSelect1">Example select</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col d-flex justify-content-start">
+                                        <button class="btn btn-primary">Create Category</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <footer class="footer mt-auto footer-light">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 small">Copyright &copy; NB Admin 2023</div>
+                                <div class="col-md-6 text-md-right small">
+                                    <a href="#!">Privacy Policy</a>
+                                    &middot;
+                                    <a href="#!">Terms &amp; Conditions</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+        </div>
+        <%- script_tags %>
+</body>
+
+</html>

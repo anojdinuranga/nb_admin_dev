@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Event Add</title>
+    <!-- Header Link File Start -->
+    <%-header_tags %>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="https://api.opencagedata.com/geocode/v1/leaflet.js?key=YOUR_OPENCAGE_API_KEY"></script>
+</head>
+<style>
+    /* Set the map container height */
+    #map {
+        height: 300px;
+    }
+</style>
+
+<body class="nav-fixed">
+
+    <!-- Header Div Start -->
+    <%-top_header %>
+        <!-- Header Div End -->
+
+        <!-- Body Content Div Start -->
+        <div id="layoutSidenav">
+
+            <!-- Side-Menu Div Start -->
+            <%-sidebar %>
+                <!-- Side-Menu Div End -->
+
+                <!-- page content Start-->
+                <div id="layoutSidenav_content">
+
+                    <main>
+                        <div class="container mt-5 mb-4">
+
+                            <!-- Title Div Start -->
+                            <div class="col-md-8 offset-md-2">
+                                <label class="fs-2">Event</label>
+                            </div>
+                            <!-- Title Div End -->
+
+                            <!-- Ticket Category Div Start -->
+                            <div class="col-md-8 offset-md-2">
+                                <div class="row">
+
+                                    <!-- Title Div Start -->
+                                    <div class="col-12 mb-4 ">
+                                        <label class="form-label fs-4">Table & Seat Count</label>
+                                    </div>
+                                    <!-- Title Div End -->
+
+                                    <!-- New Ticket Category Div Start -->
+                                    <div class="col-12 mb-4">
+                                        <div class="row">
+
+                                            <!-- Option Div Start -->
+                                            <div id="accordion">
+
+                                                <!-- Card 01 Start -->
+                                                <div class="card mb-4">
+                                                    <div id="headingOne">
+                                                        <h5 class="mb-0">
+                                                            <button class="btn btn-primary m-3" data-toggle="collapse"
+                                                                data-target="#collapseOne" aria-expanded="true"
+                                                                aria-controls="collapseOne">
+                                                                Ticket Category 01
+                                                            </button>
+                                                        </h5>
+                                                    </div>
+
+                                                    <div id="collapseOne" class="collapse show"
+                                                        aria-labelledby="headingOne">
+                                                        <div class="card-body">
+
+                                                            <!-- Content Div Start -->
+                                                            <div class="col-12">
+                                                                <div class="row">
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                01</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                02</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                03</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                04</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+                                                                </div>
+                                                            </div>
+                                                            <!-- Content Div End  -->
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Card 01 End -->
+
+                                                <!-- Card 02 Start -->
+                                                <div class="card mb-4">
+                                                    <div id="headingTwo">
+                                                        <h5 class="mb-0">
+                                                            <button class="btn btn-primary collapsed m-3"
+                                                                data-toggle="collapse" data-target="#collapseTwo"
+                                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                                Ticket Category 02
+                                                            </button>
+                                                        </h5>
+                                                    </div>
+
+                                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+                                                        <div class="card-body">
+
+                                                            <!-- Content Div Start -->
+                                                            <div class="col-12">
+                                                                <div class="row">
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                01</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                02</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                03</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                04</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+                                                                </div>
+                                                            </div>
+                                                            <!-- Content Div End  -->
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Card 02 End -->
+
+                                                <!-- Card 03 Start -->
+                                                <div class="card mb-4">
+                                                    <div id="headingThree">
+                                                        <h5 class="mb-0">
+                                                            <button class="btn btn-primary collapsed m-3"
+                                                                data-toggle="collapse" data-target="#collapseThree"
+                                                                aria-expanded="false" aria-controls="collapseThree">
+                                                                Ticket Category 03
+                                                            </button>
+                                                        </h5>
+                                                    </div>
+
+                                                    <div id="collapseThree" class="collapse"
+                                                        aria-labelledby="headingThree">
+                                                        <div class="card-body">
+
+                                                            <!-- Content Div Start -->
+                                                            <div class="col-12">
+                                                                <div class="row">
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                01</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                02</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                03</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+                                                                    <!-- Table Div Start -->
+                                                                    <div
+                                                                        class="col-12 d-flex justify-content-around align-items-center mb-4">
+                                                                        <div>
+                                                                            <label class="form-label fs-6">Table
+                                                                                04</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input class="form-control"
+                                                                                placeholder="Seat Count" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Table Div End -->
+
+                                                                </div>
+                                                            </div>
+                                                            <!-- Content Div End  -->
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Card 03 End -->
+
+                                            </div>
+                                            <!-- Option Div End -->
+
+                                        </div>
+                                    </div>
+                                    <!--New Ticket Category Div End -->
+
+                                    <!-- Button Div Start -->
+                                    <div class="col-12 d-flex justify-content-between mt-5">
+                                        <a href="/event" class="btn btn-warning text-white">Back</a>
+                                        <a href="#" class="btn btn-success">Next</a>
+                                    </div>
+                                    <!-- Button Div End -->
+
+                                </div>
+                            </div>
+                            <!-- Ticket Category Div End -->
+
+                        </div>
+                    </main>
+
+                </div>
+                <!-- page content End-->
+
+        </div>
+        <!-- Body Content Div End -->
+
+
+        <!-- Script Tag Start -->
+        <%- script_tags %>
+            <!-- Script Tag End -->
+
+</body>
+
+</html>

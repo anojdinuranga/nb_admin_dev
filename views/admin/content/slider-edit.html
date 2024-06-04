@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Slider Update</title>
+    <!-- Header Link File Start -->
+    <%-header_tags %>
+        <!-- Header Link File End -->
+</head>
+
+<body class="nav-fixed">
+
+    <!-- Header Div Start -->
+    <%-top_header %>
+        <!-- Header Div End -->
+
+        <!-- Body Content Div Start -->
+        <div id="layoutSidenav">
+
+            <!-- Side-Menu Div Start -->
+            <%-sidebar %>
+                <!-- Side-Menu Div End -->
+
+                <!-- Body-Content Div Start -->
+                <div id="layoutSidenav_content">
+                    <main>
+                        <!-- Page Title Div Start -->
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Slider Update
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Update Slider</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb mb-0 mt-4">
+                                        <li class="breadcrumb-item"><a href="/event-management">Slider Management</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Slider Update</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Page Title Div End -->
+
+                        <!-- page content Start-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Title</label>
+
+                                            <input type="text" class="form-control" placeholder="Slider Title"
+                                                id="title" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Alter</label>
+
+                                            <input type="text" class="form-control" placeholder="Slider Alter"
+                                                id="alter" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Description</label>
+
+                                            <input type="text" class="form-control" placeholder="Slider Description"
+                                                id="description" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Update Slider</h5>
+                                            <div class="d-flex justify-content-between">
+                                                <button onclick="addSlider()" class="btn btn-primary">Publish</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Feature image -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Slider Images</h5>
+                                            <div id="imageContainer" class="border-radius-20 image-uploader-container"
+                                                onclick="openImageInput()">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/slider-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: AVIF</p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="SliderImage" accept="image/*" class="d-none"
+                                                onchange="displayImage()">
+                                            <!-- Input Field Div End -->
+                                        </div>
+                                    </div>
+                                    <!-- Feature image -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- page content End-->
+                    </main>
+
+
+                </div>
+                <!-- Body-Content Div End -->
+        </div>
+        <!-- Body Content Div End -->
+
+
+        <!-- Script Tag Start -->
+        <%- script_tags %>
+            <!-- Script Tag End -->
+
+            <script>
+
+                var currentUrl = window.location.href;
+                var parts = currentUrl.split('/');
+                var sliderId = parts[parts.length - 1];
+
+                function openImageInput() {
+                    var input = document.getElementById('SliderImage');
+                    input.click();
+                }
+                function openSliderImageInput() {
+                    var input = document.getElementById('SlidersImage');
+                    input.click();
+                }
+
+                function displayImage() {
+                    const input = document.getElementById('SliderImage');
+                    const container = document.getElementById('imageContainer');
+
+                    const file = input.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            const image = new Image();
+                            image.src = e.target.result;
+                            image.className = "previewImage";
+                            container.innerHTML = '';
+
+                            image.style.width = '100%';
+                            image.style.height = '100%';
+
+                            container.appendChild(image);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                }
+
+                function displaySliderImage() {
+                    const input = document.getElementById('SlidersImage');
+                    const container = document.getElementById('Slider-images');
+
+                    // Loop through each selected file
+                    for (let i = 0; i < input.files.length; i++) {
+                        const file = input.files[i];
+
+                        if (file) {
+                            const reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                const image = new Image();
+                                image.src = e.target.result;
+                                image.className = "previewImage";
+
+                                image.style.width = '100%';
+                                image.style.height = '100%';
+                                let id = new Date().getTime() + i; // Ensure unique ID for each image
+                                let imageName = `Image ${i + 1}`; // You can set the image name as desired
+
+                                let imageChild = `
+                            <div class="col-md-6 Slider-image-container">
+                                <div class="border-radius-20" onclick="openSliderImageInput()">
+                                    <div class="row text-center p-3 Slider-image-view">
+                                        <img id="${id}" data-name="${imageName}" src="" width="100%" class="mb-3"/>
+                                    </div>
+                                </div>   
+                                <button class="btn btn-sm btn-danger Slider-image-delete" onclick="SliderImageDelete(this, '${imageName}')">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                                <input type="file" id="${id}I" class="d-none SliderImg">
+                            </div>`;
+
+                                container.innerHTML += imageChild;
+                                document.getElementById(id).src = e.target.result;
+                                document.getElementById(id).setAttribute('data-name', imageName); // Set the image name as an attribute
+                                SliderImageArray.push({ file: file, name: imageName });
+                            };
+
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                }
+
+                function SliderImageDelete(element, imageName) {
+                    element.parentElement.remove();
+                    SliderImageArray = SliderImageArray.filter(item => item.name != imageName);
+                }
+            
+                function uploadProfileImage() {
+                    alert('Profile Image uploaded successfully!');
+                }
+                // Features Image Add Function End 
+
+
+
+                function previewImages() {
+                    const input = document.getElementById('imageInput');
+                    const gallery = document.getElementById('Slider-images');
+
+                    const maxImages = 6;
+                    const remainingSlots = maxImages - gallery.childElementCount;
+
+                    for (let i = 0; i < Math.min(input.files.length, remainingSlots); i++) {
+                        const file = input.files[i];
+
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const imgElement = document.createElement('img');
+                            imgElement.className = 'Slider-image-view';
+                            imgElement.src = e.target.result;
+                            imgElement.alt = 'Uploaded Image';
+
+                            const removeBtn = document.createElement('button');
+                            removeBtn.className = 'btn btn-danger , mt-4';
+                            removeBtn.innerHTML = 'Remove&nbsp;<i class="fa-solid fa-xmark"></i>';
+                            removeBtn.addEventListener('click', function () {
+                                removeImage(imgElement);
+                            });
+
+                            const Slider_images_div = document.createElement('div');
+                            Slider_images_div.className = 'col-md-2';
+
+                            Slider_images_div.appendChild(imgElement);
+                            Slider_images_div.appendChild(removeBtn);
+
+                            gallery.appendChild(Slider_images_div);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+
+                    input.value = '';
+                }
+
+                // Slider Add Function Start
+                function addSlider() {
+
+                    $.ajax({
+                        url: '/api/v1/slider/edit',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+
+                            "id": sliderId,
+                            "title": $('#title').val(),
+                            "alt": $('#alter').val(),
+                            "description": $('#description').val()
+
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+
+                                SliderImageChange(sliderId);
+
+                            } else {
+                                console.log(data);
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                // Slider Add Function End
+
+
+                async function SliderImageChange(SliderId) {
+
+                    if (document.getElementById("SliderImage").files.length === 0) {
+                        SliderImagesChange(SliderId)
+                        return;
+                    }
+
+                    let data = new FormData();
+                    data.append("imageId", 3);
+                    data.append("resultId", SliderId);
+                    data.append("image", document.getElementById("SliderImage").files[0]);
+
+                    $.ajax({
+                        url: "/api/upload",
+                        data: data,
+                        method: "post",
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+
+                            SliderImagesChange(SliderId);
+
+                            var data = JSON.parse(data);
+                            if (data.status == "true" || data.status == true) {
+
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'Done',
+                                    message: "Success",
+                                });
+
+                                setTimeout(()=>{location.href = ""},400)
+
+                            } else {
+                                iziToast.error({
+                                    timeout: 5000,
+                                    icon: 'fa fa-ban',
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+
+
+                            }
+                        },
+                        error: function () {
+                            alert("Can not post data");
+                        }
+                    });
+
+                }
+
+
+                async function SliderImagesChange(SliderId) {
+
+                    console.log("🚀 ~ file: Slider-add.html:573 ~ newArray ~ SliderImageArray:", SliderImageArray)
+
+                    // Create a new sorted array without modifying the original one
+                    let newArray = [...SliderImageArray].sort((a, b) => {
+                        
+                        
+                        const nameA = a.name.toString().toLowerCase();
+                        const nameB = b.name.toString().toLowerCase();
+                        return nameA.localeCompare(nameB);
+                    });
+                    
+                    console.log("🚀 ~ file: Slider-add.html:573 ~ newArray ~ newArray:", newArray)
+
+                    for (let i = 0; i < newArray.length; i++) {
+
+
+                        let data = new FormData();
+                        data.append("imageId", 2);
+                        data.append("resultId", SliderId);
+                        data.append("image", newArray[i].file);
+                        
+
+                        $.ajax({
+                            url: "/api/upload",
+                            data: data,
+                            method: "post",
+                            mimeType: "multipart/form-data",
+                            contentType: false,
+                            processData: false,
+                            success: function (data) {
+
+                                var data = JSON.parse(data);
+                                if (data.status == "true" || data.status == true) {
+
+                                    iziToast.success({
+                                        timeout: 5000,
+                                        icon: 'fa fa-check',
+                                        title: 'Done',
+                                        message: "Success",
+                                    });
+
+                                } else {
+                                    iziToast.error({
+                                        timeout: 5000,
+                                        icon: 'fa fa-ban',
+                                        title: 'Error',
+                                        message: data.message,
+                                    });
+
+
+                                }
+
+                                if (i === SliderImageArray.length - 1) {
+                                    location.href = "";
+                                }
+                            },
+                            error: function () {
+                                alert("Can not post data");
+                            }
+                        });
+
+                    }
+
+                }
+
+                function sliderView() {
+                    $.ajax({
+                        url: '/api/v1/slider/view',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            "id": sliderId
+                        },
+
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+                                console.log(data);
+
+                                $("#title").val(data.data.title);
+                                $("#alter").val(data.data.alt);
+                                $("#description").val(data.data.description);
+
+                                const container = document.getElementById('imageContainer');
+                                const image = new Image();
+                                image.src = data.data.image_url;
+                                image.className = "previewImage";
+                                container.innerHTML = '';
+
+                                image.style.width = '100%';
+                                image.style.height = '100%';
+
+                                container.appendChild(image);
+                            } else {
+                                console.log(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                sliderView()
+
+            </script>
+
+</body>
+
+</html>

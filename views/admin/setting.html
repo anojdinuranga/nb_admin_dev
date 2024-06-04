@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Setting</title>
+    <!-- Header Link File Start -->
+    <%-header_tags %>
+        <!-- Header Link File End -->
+</head>
+
+<body class="nav-fixed">
+
+    <!-- Header Div Start -->
+    <%-top_header %>
+        <!-- Header Div End -->
+
+        <!-- Body Content Div Start -->
+        <div id="layoutSidenav">
+
+            <!-- Side-Menu Div Start -->
+            <%-sidebar %>
+                <!-- Side-Menu Div End -->
+
+                <!-- Body-Content Div Start -->
+                <div id="layoutSidenav_content">
+                    <main>
+                        <!-- Page Title Div Start -->
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Setting
+                                            </h1>
+                                            <div class="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb mb-0 mt-4">
+                                        <li class="breadcrumb-item"><a href="/event-management">Setting</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Dollar rate</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Page Title Div End -->
+
+                        <!-- page content Start-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Dollar rate</label>
+                                            <input type="text" class="form-control" placeholder="Dollar rate"
+                                                id="dollar_rate" value="<%= dollarRate %>"/>
+                                        </div>
+                                        <!-- Title Add Div End -->
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="col-12 mb-3">
+                                        <label class="form-label">&nbsp;</label><br>
+                                        <button onclick="changeDollarRate()" class="btn btn-primary">Change</button>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- page content End-->
+                    </main>
+
+
+                </div>
+                <!-- Body-Content Div End -->
+        </div>
+        <!-- Body Content Div End -->
+
+
+        <!-- Script Tag Start -->
+        <%- script_tags %>
+        <!-- Script Tag End -->
+
+        <script>
+            
+            function changeDollarRate() {
+
+                $.ajax({
+                    url: '/api/v1/setting/dollar-rate/update',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        "dollarRate": $('#dollar_rate').val()
+
+                    }),
+                    success: function (data) {
+                        if (data.status === true || data.status === "true") {
+
+                            iziToast.success({
+                                title: 'Success',
+                                message: data.message,
+                            });
+
+                        } else {
+                            console.log(data);
+                            iziToast.error({
+                                title: 'Error',
+                                message: data.message,
+                            });
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error('Error making the request:', textStatus, errorThrown);
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'An error occurred while processing your request.',
+                        });
+                    }
+                });
+            }
+            
+        </script>
+
+</body>
+
+</html>

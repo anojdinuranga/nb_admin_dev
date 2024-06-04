@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Moderator Add</title>
+    <!-- Header Link File Start -->
+    <%-header_tags %>
+        <!-- Header Link File End -->
+</head>
+
+<body class="nav-fixed">
+
+    <!-- Header Div Start -->
+    <%-top_header %>
+        <!-- Header Div End -->
+
+        <!-- Body Content Div Start -->
+        <div id="layoutSidenav">
+
+            <!-- Side-Menu Div Start -->
+            <%-sidebar %>
+                <!-- Side-Menu Div End -->
+
+                <!-- Body-Content Div Start -->
+                <div id="layoutSidenav_content">
+                    <main>
+                        <!-- Page Title Div Start -->
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Moderator Add
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Add Moderator</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb mb-0 mt-4">
+                                        <li class="breadcrumb-item"><a href="#!">Moderator Management</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Moderator Add</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Page Title Div End -->
+
+                        <!-- page content Start-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+
+                                        <div class="col-md-12 mb-3">
+                                            <h4>Basic Details</h4>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" class="form-control" placeholder="" id="firstName" />
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" placeholder="" id="lastName" />
+                                        </div>
+
+                                        <div class="col-md-8 mb-3">
+                                            <label class="form-label">Email Address</label>
+                                            <input type="text" class="form-control" placeholder="" id="email" />
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Phone Number</label>
+                                            <input type="text" class="form-control" placeholder="" id="phone" />
+                                        </div>
+
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label">Address</label>
+                                            <textarea class="form-control" id="address" rows="3"></textarea>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Password</label>
+                                            <input type="text" class="form-control" placeholder="" id="password" />
+                                        </div>
+
+                                        <div class="col-md-12 mt-4 mb-3">
+                                            <h4>Permissions</h4>
+                                        </div>
+<!-- 
+
+                                        <div class="col-md-4 mb-3">
+                                            <h6>Notifications</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions" value="notification_center" id="assignPermisssions1" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions1">Notification Center</label>
+                                            </div>
+
+                                            <h6 class="mt-4">Event Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="ticket_category_management" id="assignPermisssions5"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions5">Ticket
+                                                    Category Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="event_management" id="assignPermisssions6" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions6">Event
+                                                    Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="gift_voucher_management" id="assignPermisssions7"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions7">Gift
+                                                    Voucher Management</label>
+                                            </div>
+
+                                            <h6 class="mt-4">Product Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="product_management" id="assignPermisssions16"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions16">Product
+                                                    Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="product_color_management" id="assignPermisssions17"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions17">Product
+                                                    Color Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="product_category_management" id="assignPermisssions18"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions18">Product
+                                                    Category Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="sub_category_management" id="assignPermisssions19"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions19">Sub
+                                                    Category Management</label>
+                                            </div>
+
+                                            
+                                            <h6 class="mt-4">3D Assets Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="fabrics_management" id="assignPermisssions22"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions22">Fabrics
+                                                    Management</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <h6>Appointment</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions" value="appointment_management" id="assignPermisssions2" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions2">Appointment Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions" value="holiday_management" id="assignPermisssions3" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions3">Holidays Management</label>
+                                            </div>
+
+                                            <h6 class="mt-4">Booking Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="gift_voucher_booking_management" id="assignPermisssions8"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions8">Gift
+                                                    Voucher Booking Management</label>
+                                            </div>
+                                            
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="seat_booking_management" id="assignPermisssions9"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions9">Seat
+                                                    Booking Management</label>
+                                            </div>
+                                            
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="seat_attendance_management" id="assignPermisssions10"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions10">Seat
+                                                    Attendance Management</label>
+                                            </div>
+
+                                            <h6 class="mt-4">Newsletters</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="newsletters_list_access" id="assignPermisssions20"
+                                                    type="checkbox">
+                                                <label class="custom-control-label"
+                                                    for="assignPermisssions20">Newsletters List Access</label>
+                                            </div>
+
+                                            <h6 class="mt-4">Contact Messages</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="contact_us_list_access" id="assignPermisssions21"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions21">Contact
+                                                    Us List Access</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <h6>User Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions" value="user_management" id="assignPermisssions4" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions4">User Management</label>
+                                            </div>
+
+                                            <h6 class="mt-4">Order Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="pending_order_management" id="assignPermisssions11"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions11">Pending
+                                                    Order Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="paid_order_management" id="assignPermisssions12"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions12">Paid
+                                                    Order Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="processing_order_management" id="assignPermisssions13"
+                                                    type="checkbox">
+                                                <label class="custom-control-label"
+                                                    for="assignPermisssions13">Processing Order Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="delivered_order_management" id="assignPermisssions14"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions14">Delivered
+                                                    Order Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="canceled_order_management" id="assignPermisssions15"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions15">Canceled
+                                                    Order Management</label>
+                                            </div>
+
+                                            <h6 class="mt-4">Site Content</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="slider_management" id="assignPermisssions23" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions23">Slider
+                                                    Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="home_content_management" id="assignPermisssions24"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions24">Home
+                                                    Content Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="site_Settings_access" id="assignPermisssions25"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions25">Site
+                                                    Settings Access</label>
+                                            </div>
+
+                                        </div> -->
+
+
+                                        <div class="col-md-4 mb-3">
+                                            <h6>Notifications</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions" value="notification_center" id="assignPermisssions1" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions1">Notification Center</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <h6>Appointment</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions" value="appointment_management" id="assignPermisssions2" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions2">Appointment Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions" value="holiday_management" id="assignPermisssions3" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions3">Holidays Management</label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4 mb-3">
+                                             <h6>User Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions" value="user_management" id="assignPermisssions4" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions4">User Management</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <h6 class="mt-4">Event Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="ticket_category_management" id="assignPermisssions5"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions5">Ticket
+                                                    Category Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="event_management" id="assignPermisssions6" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions6">Event
+                                                    Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="gift_voucher_management" id="assignPermisssions7"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions7">Gift
+                                                    Voucher Management</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <h6 class="mt-4">Booking Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="gift_voucher_booking_management" id="assignPermisssions8"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions8">Gift
+                                                    Voucher Booking Management</label>
+                                            </div>
+                                            
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="seat_booking_management" id="assignPermisssions9"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions9">Seat
+                                                    Booking Management</label>
+                                            </div>
+                                            
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="seat_attendance_management" id="assignPermisssions10"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions10">Seat
+                                                    Attendance Management</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <h6 class="mt-4">Order Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="pending_order_management" id="assignPermisssions11"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions11">Pending
+                                                    Order Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="paid_order_management" id="assignPermisssions12"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions12">Paid
+                                                    Order Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="processing_order_management" id="assignPermisssions13"
+                                                    type="checkbox">
+                                                <label class="custom-control-label"
+                                                    for="assignPermisssions13">Processing Order Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="delivered_order_management" id="assignPermisssions14"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions14">Delivered
+                                                    Order Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="canceled_order_management" id="assignPermisssions15"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions15">Canceled
+                                                    Order Management</label>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4 mb-3">
+                                            <h6 class="mt-4">Product Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="product_management" id="assignPermisssions16"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions16">Product
+                                                    Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="product_color_management" id="assignPermisssions17"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions17">Product
+                                                    Color Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="product_category_management" id="assignPermisssions18"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions18">Product
+                                                    Category Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="sub_category_management" id="assignPermisssions19"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions19">Sub
+                                                    Category Management</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+
+                                            <h6 class="mt-4">Newsletters</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="newsletters_list_access" id="assignPermisssions20"
+                                                    type="checkbox">
+                                                <label class="custom-control-label"
+                                                    for="assignPermisssions20">Newsletters List Access</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+
+                                            <h6 class="mt-4">Contact Messages</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="contact_us_list_access" id="assignPermisssions21"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions21">Contact
+                                                    Us List Access</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <h6 class="mt-4">3D Assets Management</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="fabrics_management" id="assignPermisssions22"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions22">Fabrics
+                                                    Management</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                           
+                                            
+
+                                            <h6 class="mt-4">Site Content</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="slider_management" id="assignPermisssions23" type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions23">Slider
+                                                    Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="home_content_management" id="assignPermisssions24"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions24">Home
+                                                    Content Management</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="site_Settings_access" id="assignPermisssions25"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions25">Site
+                                                    Settings Access</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h6 class="mt-4">Invoice</h6>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input assignPermisssions"
+                                                    value="invoice" id="assignPermisssions26"
+                                                    type="checkbox">
+                                                <label class="custom-control-label" for="assignPermisssions26">Invoice</label>
+                                            </div>
+                                        </div>
+
+
+
+                                            
+
+                                            
+
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Add User</h5>
+                                            <div class="d-flex justify-content-between">
+                                                <!-- <button class="btn btn-warning disabled" disabled>Draft</button> -->
+                                                <button onclick="moderator_add()"
+                                                    class="btn btn-primary">Publish</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- page content End-->
+                    </main>
+
+
+                </div>
+                <!-- Body-Content Div End -->
+        </div>
+        <!-- Body Content Div End -->
+
+
+        <!-- Script Tag Start -->
+        <%- script_tags %>
+            <!-- Script Tag End -->
+
+            <script>
+                function moderator_add() {
+                    const checkedValues = Array.from(document.querySelectorAll('.assignPermisssions')).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+
+                    $.ajax({
+                        url: '/api/v1/user/moderator/add',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "firstName": $('#firstName').val(),
+                            "lastName": $('#lastName').val(),
+                            "email": $('#email').val(),
+                            "address": $('#address').val(),
+                            "mobile": $('#phone').val(),
+                            "password": $('#password').val(),
+                            "permissions": checkedValues
+                        }),
+
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+                                setTimeout(() => { location.href = '' }, 1000);
+
+                            } else {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+            </script>
+
+
+</body>
+
+</html>

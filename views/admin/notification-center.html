@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Notifications</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="/assets/css/offcanvas.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
+    <%- header_tags %>
+</head>
+
+<body class="nav-fixed">
+    <%-top_header %>
+        <div id="layoutSidenav">
+            <%-sidebar %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Notification Center
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Manage Notifications</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Main page content-->
+                        <div class="container">
+                            <div class="mb-5">
+                                <h5 class="mb-3">Latest Notifications</h5>
+
+                                <% notifications.forEach(function(notification) { %>
+                                    <% if(notification.type === 1){ %>
+                                        <div class="alert alert-secondary alert-icon" role="alert">
+                                            <button class="close" type="button" onclick="delete_notification(<%- notification.id %>, this)">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <div class="alert-icon-aside">
+                                                <i data-feather="feather"></i>
+                                            </div>
+                                            <div class="alert-icon-content">
+                                                <h6 class="alert-heading">Low stock alert</h6>
+                                                <%- notification.text %>
+                                            </div>
+                                        </div>
+                                    <%} else { %>
+                                        <div class="alert alert-success alert-icon" role="alert">
+                                            <button class="close" type="button" onclick="delete_notification(<%- notification.id %>, this)">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <div class="alert-icon-aside">
+                                                <i data-feather="feather"></i>
+                                            </div>
+                                            <div class="alert-icon-content">
+                                                <h6 class="alert-heading">Order Notification</h6>
+                                                <%- notification.text %>
+                                            </div>
+                                        </div>
+                                    <%} %>
+                                    
+                                <% }); %>
+
+                                
+
+                            </div>
+
+                        </div>
+                    </main>
+                </div>
+        </div>
+
+        <%- script_tags %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"
+            crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
+        <script>
+
+            function delete_notification (id, element) {
+                $.ajax({
+                    url: "/api/v1/notification/delete",
+                    method: "post",
+                    data: JSON.stringify({
+                        id: id
+                    }),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: async function (data) {
+                        if (data.status) {
+
+                            element.parentElement.remove();
+
+                            iziToast.success({
+                                timeout: 5000,
+                                icon: 'fa fa-check',
+                                title: 'Done',
+                                message: data.message,
+                            });
+
+                        } else {
+
+                            iziToast.error({
+                                timeout: 5000,
+                                icon: 'fa fa-ban',
+                                title: 'Error',
+                                message: data.message,
+                            });
+
+                        }
+                    },
+                    error: function (data) {
+
+                        iziToast.error({
+                            timeout: 5000,
+                            icon: 'fa fa-ban',
+                            title: 'Error',
+                            message: data.statusText,
+                        });
+
+                    }
+                });
+            }
+        </script>
+
+</body>
+
+</html>

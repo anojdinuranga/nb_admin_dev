@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>User List</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="/assets/css/offcanvas.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <%- header_tags %>
+</head>
+
+<body class="nav-fixed">
+    <%-top_header %>
+        <div id="layoutSidenav">
+            <%-sidebar %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Users
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">View Users</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Main page content-->
+                        <div class="container">
+                            <div class="card mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    User List
+                                    <button type="button" class="btn btn-link" id="filterToggle">
+                                        <i data-feather="filter"></i> <!-- Icon for the filter -->
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="datatable">
+                                        <table class="table table-striped table-bordered table-hover" id="dataTable"
+                                            width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Email</th>
+                                                    <th>Company</th>
+                                                    <th>Address</th>
+                                                    <th>Mobile</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Email</th>
+                                                    <th>Company</th>
+                                                    <th>Address</th>
+                                                    <th>Mobile</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                <% let counter = 0; %>
+                                                <% users.forEach(function(item) { %>
+                                                    <% counter += 1; %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= counter %>
+                                                        </td>
+                                                        <td>
+                                                            <%= item.first_name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= item.last_name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= item.email %>
+                                                        </td>
+                                                        <td>
+                                                            <%= item.company %>
+                                                        </td>
+                                                        <td>
+                                                            <%= item.address %>
+                                                        </td>
+                                                        <td>
+                                                            <%= item.mobile %>
+                                                        </td>
+                                                        <td>
+                                                            <% if (item.status === 2) {%>
+                                                                Blocked
+                                                            <% } %>
+                                                            <% if (item.status === 1) {%>
+                                                                Active
+                                                            <% } %>
+                                                        </td>
+                                                        <td>
+                                                            <% if (item.status === 2) {%>
+                                                                <button class="btn btn-sm btn-success" onclick="status_change(<%= item.id %>, 1)"><i class="fa fa-check"></i></button>
+                                                            <% } %>
+                                                            <% if (item.status === 1) {%>
+                                                                <button class="btn-sm btn-warning"  onclick="status_change(<%= item.id %>, 2)"><i class="fa fa-ban"></i></button>
+                                                            <% } %>
+                                                            <button class="btn btn-sm btn-danger" onclick="deleteData(<%= item.id %>)"><i class="fa fa-trash"></i></button>
+                                                            <a class="d-none btn btn-sm btn-primary" href="/user-edit/<%= item.id %>"><i class="fa fa-edit"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <% }); %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const filterShop = document.getElementById('filterShop');
+                const filterOwner = document.getElementById('filterOwner');
+
+                filterShop.addEventListener('change', applyFilters);
+                filterOwner.addEventListener('change', applyFilters);
+            });
+
+            function applyFilters() {
+                const filterShopValue = document.getElementById('filterShop').value;
+                const filterOwnerValue = document.getElementById('filterOwner').value;
+
+                // Loop through table rows and apply filtering
+                const tableRows = document.querySelectorAll('.datatable table tbody tr');
+                tableRows.forEach(row => {
+                    const shopCell = row.querySelector('td:nth-child(1)').textContent;
+                    const ownerCell = row.querySelector('td:nth-child(5)').textContent;
+
+                    const shopMatch = filterShopValue === '' || filterShopValue === shopCell;
+                    const ownerMatch = filterOwnerValue === '' || filterOwnerValue === ownerCell;
+
+                    if (shopMatch && ownerMatch) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+
+            // Assuming you have a list of items with unique IDs
+            const itemList = [
+                { id: 123, status: "pending" },
+                // ... other items
+            ];
+
+            // Function to handle edit button click
+            function handleEditButtonClick(event) {
+                const itemId = event.target.dataset.id;
+                // Handle edit logic here, e.g., open edit modal
+                console.log(`Edit button clicked for item with ID ${itemId}`);
+            }
+
+            // Function to handle delete button click
+            function handleDeleteButtonClick(event) {
+                const itemId = event.target.dataset.id;
+                // Handle delete logic here, e.g., show confirmation modal
+                console.log(`Delete button clicked for item with ID ${itemId}`);
+            }
+
+            // Function to handle status change
+            function handleStatusChange(event) {
+                const itemId = event.target.dataset.id;
+                const selectedStatus = event.target.value;
+                // Update the status of the item in your data
+                const item = itemList.find(item => item.id === parseInt(itemId));
+                if (item) {
+                    item.status = selectedStatus;
+                    console.log(`Status changed for item with ID ${itemId} to ${selectedStatus}`);
+                }
+            }
+
+            // Attach event listeners to buttons and select elements
+            const editButtons = document.querySelectorAll('.edit-button');
+            editButtons.forEach(button => {
+                button.addEventListener('click', handleEditButtonClick);
+            });
+
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', handleDeleteButtonClick);
+            });
+
+            const statusSelects = document.querySelectorAll('.status-select');
+            statusSelects.forEach(select => {
+                select.addEventListener('change', handleStatusChange);
+            });
+
+            function deleteData(resultId) {
+                    iziToast.show({
+                        theme: 'dark',
+                        icon: 'fa-solid fa-trash-can',
+                        title: 'Are you sure?',
+                        message: 'Do you want to delete this data?',
+                        position: 'center',
+                        progressBarColor: 'rgb(0, 255, 184)',
+                        buttons: [
+                            ['<button>Yes</button>', function (instance, toast) {
+
+                                $.ajax({
+                                    url: "/api/v1/delete_data/",
+                                    method: "post",
+                                    data: JSON.stringify({
+                                        tableId: 1,
+                                        resultId: resultId
+                                    }),
+                                    dataType: "json",
+                                    contentType: "application/json",
+                                    success: async function (data) {
+                                        if (data.status) {
+
+                                            iziToast.success({
+                                                timeout: 5000,
+                                                icon: 'fa fa-check',
+                                                title: 'Done',
+                                                message: data.message,
+                                            });
+                                            location.href = "";
+
+                                        } else {
+
+                                            iziToast.error({
+                                                timeout: 5000,
+                                                icon: 'fa fa-ban',
+                                                title: 'Error',
+                                                message: data.message,
+                                            });
+
+                                        }
+                                    },
+                                    error: function (data) {
+
+                                        iziToast.error({
+                                            timeout: 5000,
+                                            icon: 'fa fa-ban',
+                                            title: 'Error',
+                                            message: data.statusText,
+                                        });
+
+                                    }
+                                });
+
+                                iziToast.hide({
+                                    transitionOut: 'fadeOutUp'
+                                }, toast);
+                            }, true],
+                            ['<button>No</button>', function (instance, toast) {
+                                iziToast.hide({
+                                    transitionOut: 'fadeOutUp'
+                                }, toast);
+                            }]
+                        ],
+                    });
+                }
+            
+                function status_change(resultId, status) {
+                    iziToast.show({
+                        theme: 'dark',
+                        icon: 'fa-solid fa-trash-can',
+                        title: 'Are you sure?',
+                        message: 'Do you want to do this action?',
+                        position: 'center',
+                        progressBarColor: 'rgb(0, 255, 184)',
+                        buttons: [
+                            ['<button>Yes</button>', function (instance, toast) {
+
+                                $.ajax({
+                                    url: "/api/v1/status_change/",
+                                    method: "post",
+                                    data: JSON.stringify({
+                                        tableId: 1,
+                                        status: status,
+                                        resultId: resultId
+                                    }),
+                                    dataType: "json",
+                                    contentType: "application/json",
+                                    success: async function (data) {
+                                        if (data.status) {
+
+                                            iziToast.success({
+                                                timeout: 5000,
+                                                icon: 'fa fa-check',
+                                                title: 'Done',
+                                                message: data.message,
+                                            });
+                                            location.href = "";
+
+                                        } else {
+
+                                            iziToast.error({
+                                                timeout: 5000,
+                                                icon: 'fa fa-ban',
+                                                title: 'Error',
+                                                message: data.message,
+                                            });
+
+                                        }
+                                    },
+                                    error: function (data) {
+
+                                        iziToast.error({
+                                            timeout: 5000,
+                                            icon: 'fa fa-ban',
+                                            title: 'Error',
+                                            message: data.statusText,
+                                        });
+
+                                    }
+                                });
+
+                                iziToast.hide({
+                                    transitionOut: 'fadeOutUp'
+                                }, toast);
+                            }, true],
+                            ['<button>No</button>', function (instance, toast) {
+                                iziToast.hide({
+                                    transitionOut: 'fadeOutUp'
+                                }, toast);
+                            }]
+                        ],
+                    });
+                }
+            
+
+        </script>
+        <%- script_tags %>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>

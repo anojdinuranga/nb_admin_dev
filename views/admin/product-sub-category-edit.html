@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Sub Category Management</title>
+    <%-header_tags %>
+</head>
+
+<body class="nav-fixed">
+    <%-top_header %>
+        <div id="layoutSidenav">
+            <%-sidebar %>
+                <div id="layoutSidenav_content">
+                    <div class="loading-overlay">
+                        <div class="loading-overlay-body">
+                            <div class="card">
+                                <div class="card-body text-center px-5 py-4">
+                                    <div class="spinner-border text-dark" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <h4 class="mt-3">Please be patient...</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <main>
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Sub Category Management
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Edit Sub Category</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb mb-0 mt-4">
+                                        <li class="breadcrumb-item"><a href="/sub-category-list">Sub Category
+                                                Management</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Edit Sub Category</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </header>
+
+                        <!-- Main page content Start-->
+                        <div class="container">
+                            <div class="">
+                                <div class="row mb-5">
+                                    <div class="col-9">
+                                        <div class="row">
+
+                                            <!-- Product Category Select Div Start -->
+                                            <div class="col-12 mb-3">
+                                                <label class="form-label">Product Category</label>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="productCategory"></select>
+                                                </div>
+                                            </div>
+                                            <!-- Product Category Select Div End -->
+
+                                            <!-- Sub Category Select Div Start -->
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Sub Category Name</label>
+                                                <div class="form-group">
+                                                    <input min="0" class="form-control" id="subCategoryName"
+                                                        type="text">
+                                                </div>
+                                            </div>
+                                            <!-- Sub Category Select Div Start -->
+
+                                            <div class="col-md-12 mb-4">
+                                                <h6>Attributes</h6>
+                                                <div id="optionsContainer">
+
+                                                </div>
+                                                <button class="btn btn-warning mt-3" onclick="attributeAdd()">Add
+                                                    Attribute</button>
+                                            </div>
+
+                                            <!-- Related Category Select Div Start -->
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Related Categories</label>
+                                                <div class="row" id="subCategories">
+                                                </div> 
+                                            </div> 
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="mb-3">Update Sub Category</h5>
+                                                <div class="d-flex justify-content-between">
+                                                    <button onclick="subCategoryEdit()"
+                                                        class="btn btn-primary">Update</button>
+                                                    <a href="/sub-category-add" onclick="subCategoryEdit()"
+                                                        class="btn btn-primary">Add New</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Main page content End-->
+
+
+                    </main>
+                    <footer class="footer mt-auto footer-light">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 small">Copyright &copy; NB Admin 2023</div>
+                                <div class="col-md-6 text-md-right small">
+                                    <a href="#!">Privacy Policy</a>
+                                    &middot;
+                                    <a href="#!">Terms &amp; Conditions</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+        </div>
+        <%- script_tags %>
+
+            <script>
+                // Get the current URL
+                var currentUrl = window.location.href;
+                var parts = currentUrl.split('/');
+                var id = parts[parts.length - 1];
+                let relatedChecked = [];
+
+                // Sub Category View Function Start
+                function getProductSubCategory() {
+                    $.ajax({
+                        url: '/api/v1/product_sub_category/view',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "id": id
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                $('#subCategoryName').val(data.data.name);
+                                $('#productCategory').val(data.data.category);
+                                relatedChecked = data.data.relatedCategories;
+                                data.data.attributes.map(obj => {
+                                    addOption(obj.id, obj.name);
+                                })
+                                data.data.subcategories.map(obj => {
+                                    addSubCategory(obj.id, obj.name);
+                                })
+
+                                setTimeout(() => {
+                                    document.getElementsByClassName('loading-overlay')[0].style.display = 'none';
+                                }, 3000)
+
+                            } else {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                
+                // Sub Category View Function End
+
+                // Product Category List Load Function Start
+                function productCategory() {
+                    $.ajax({
+                        url: '/api/v1/product_category/list',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {},
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+                                console.log(data);
+
+                                let details = data.data;
+
+                                details.forEach(function (detail) {
+
+                                    let option = document.createElement('option');
+                                    option.value = detail.id;
+                                    option.textContent = detail.name;
+                                    document.getElementById('productCategory').appendChild(option);
+
+                                });
+
+                                getProductSubCategory()
+
+                            } else {
+                                console.log(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                productCategory();
+                // Product Category List Load Function End
+
+                // Sub Category Edit Function Start
+                function subCategoryEdit() {
+                    attributeSaveAll()
+                    const checkedValues = Array.from(document.querySelectorAll('.assignSubCategory:checked')).map(checkbox => checkbox.value);
+
+                    $.ajax({
+                        url: '/api/v1/product_sub_category/edit',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+
+                            "id": id,
+                            "name": $('#subCategoryName').val(),
+                            "relatedCategories": checkedValues,
+                            "category": $('#productCategory').val(),
+                            "imgUrl": "sample text"
+
+
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+
+
+                            } else {
+
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+
+                }
+
+                // Sub Category Edit Function Start
+                function attributeAdd() {
+
+                    $.ajax({
+                        url: '/api/v1/product_attributes/add',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "name": "",
+                            "subCategory": id
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                addOption(data.data.insertId);
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+
+
+                            } else {
+
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+
+                }
+
+                function addOption(id, name = "") {
+                    var optionsContainer = document.getElementById('optionsContainer');
+                    let div = document.createElement('div');
+                    div.classList.add("row");
+                    div.classList.add("mb-2");
+                    div.innerHTML = `
+                        <div class="col-10 col-lg-5">
+                            <input class="form-control" id="${id}attribute" type="text" value="${name}">
+                        </div>
+                        <div class="col-2 col-lg-3">
+                            <button class="d-none btn btn-success attributeUpdate" onclick="attributeUpdate(${id}, '${id}attribute')">
+                                <i class="fa-regular fa-save"></i>
+                            </button>
+                            <button class="btn btn-danger" onclick="removeOption(${id}, this)">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </div>
+                    `;
+                    optionsContainer.appendChild(div);;
+                    // var firstRow = optionsContainer.querySelector('.row');
+
+                    // var newRow = firstRow.cloneNode(true);
+                    // newRow.querySelector('.form-control').value = '';
+                    // optionsContainer.appendChild(newRow);
+                }
+
+                function addSubCategory(id, name = "") {
+                    let related = relatedChecked.find(item=> item.related_sub_category == id);
+                    let checked = "";
+                    if (related) {
+                        checked = "checked";
+                    }
+                    var optionsContainer = document.getElementById('subCategories');
+                    let div = document.createElement('div');
+                    div.classList.add("col-md-3");
+                    div.innerHTML = `
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input assignSubCategory"
+                                value="${id}" id="assignSubCategory${id}" type="checkbox" ${checked}>
+                            <label class="custom-control-label"
+                                for="assignSubCategory${id}">${name}</label>
+                        </div>
+                    `;
+                    optionsContainer.appendChild(div);
+                }
+
+                function attributeSaveAll() {
+                    for (let i = 0; i < document.getElementsByClassName("attributeUpdate").length; i++) {
+                        document.getElementsByClassName("attributeUpdate")[i].click();
+                    }
+                }
+
+                function removeOption(id, button) {
+                    var row = button.closest('.row');
+                    $.ajax({
+                        url: '/api/v1/delete_data',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "resultId": id,
+                            "tableId": 11
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                row.parentNode.removeChild(row);
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+
+
+                            } else {
+
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+
+                // Sub Category Edit Function Start
+                function attributeUpdate(aid, eid) {
+
+                    $.ajax({
+                        url: '/api/v1/product_attributes/edit',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "id": aid,
+                            "name": document.getElementById(eid).value,
+                            "subCategory": id
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                // iziToast.success({
+                                //     title: 'Success',
+                                //     message: data.message,
+                                // });
+
+
+                            } else {
+
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+
+                }
+
+            </script>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ticket Request</title>
+    <!-- Header Link File Start -->
+    <%-header_tags %>
+        <!-- Header Link File End -->
+</head>
+
+<body class="nav-fixed" onload="productColorList();">
+
+    <!-- Header Div Start -->
+    <%-top_header %>
+        <!-- Header Div End -->
+
+        <!-- Body Content Div Start -->
+        <div id="layoutSidenav">
+
+            <!-- Side-Menu Div Start -->
+            <%-sidebar %>
+                <!-- Side-Menu Div End -->
+
+                <!-- Body-Content Div Start -->
+                <div id="layoutSidenav_content">
+                    <main>
+
+                        <div class="col-12">
+                            <div class="row m-4">
+
+                                <!-- Page Title Div Start -->
+                                <div class="col-12 mb-4">
+                                    <label class="fs-2">Ticket Request</label>
+                                </div>
+                                <!-- Page Title Div End -->
+
+                                <!-- Ticket Request List Table Start -->
+                                <div class="col-12">
+                                    <div class="card">
+
+                                        <!-- Table Title Start -->
+                                        <div class="card-header">
+                                            <label class="form-label">Ticket Request List</label>
+                                        </div>
+                                        <!-- Table Title End -->
+
+                                        <!-- Table Start -->
+                                        <div class="card-body">
+                                            <table id="product_color_list_table">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Event</th>
+                                                        <th>User Name</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                        <!-- Table End -->
+
+                                    </div>
+                                </div>
+                                <!-- Ticket Request List Table End -->
+
+                            </div>
+                        </div>
+
+                    </main>
+                </div>
+                <!-- Body-Content Div End -->
+
+        </div>
+        <!-- Body Content Div End -->
+
+
+        <!-- Model Start -->
+        <div>
+
+            <!-- Color View Model Start -->
+            <div class="modal fade" id="Color_view_model" aria-hidden="true"
+                aria-labelledby="Color_view_edit_model_title" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="Color_view_edit_model_title">Color</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <!-- Content Div Start -->
+                        <div class="modal-body">
+                            <div class="col-12">
+                                <div class="row">
+
+                                    <!-- Color ID Enter Div Start -->
+                                    <div class="col-12 mb-5 d-none">
+                                        <label class="form-label">Color ID</label>
+
+                                        <input type="text" class="form-control" placeholder="Color Name"
+                                            id="productColorViewId" disabled />
+                                    </div>
+                                    <!-- Color ID Enter Div End -->
+
+
+                                    <!-- Color Name Enter Div Start -->
+                                    <div class="col-12 mb-5">
+                                        <label class="form-label">Color Name</label>
+
+                                        <input type="text" class="form-control" placeholder="Color Name"
+                                            id="productColorViewName" disabled />
+                                    </div>
+                                    <!-- Color Name Enter Div End -->
+
+                                    <!-- Color Code Enter Div Start -->
+                                    <div class="col-12 mb-5">
+                                        <label class="form-label">Color Name</label>
+
+                                        <input type="color" class="form-control" placeholder="Color Name"
+                                            id="productColorViewCode" disabled />
+                                    </div>
+                                    <!-- Color Code Enter Div End -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Content Div End -->
+
+                        <!-- Btn Div Start -->
+                        <div class="modal-footer d-flex justify-content-between">
+                            <button class="btn btn-warning" data-bs-toggle="modal">Cancel</button>
+                            <button class="btn btn-success" data-bs-toggle="modal" id="productColorEditButton">Update</button>
+                        </div>
+                        <!-- Btn Div End -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- Color View Model End -->
+        </div>
+        <!-- Model End -->
+
+        <!-- Script Tag Start -->
+        <%- script_tags %>
+            <!-- Script Tag End -->
+
+</body>
+
+</html>

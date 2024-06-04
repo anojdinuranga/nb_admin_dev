@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Event Edit</title>
+    <%-header_tags %>
+</head>
+
+<body class="nav-fixed">
+    <%-top_header %>
+        <div id="layoutSidenav">
+            <%-sidebar %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Event Management
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Edit Event</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb mb-0 mt-4">
+                                        <li class="breadcrumb-item"><a href="/event-management">Event Management</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Edit Event</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Main page content-->
+                        <div class="container">
+                            <div class="">
+                                <div class="row mb-5">
+
+                                    <div class="col-md-9">
+                                        <div class="row">
+
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Event Name</label>
+                                                <input type="text" class="form-control" id="eventNameEdit" />
+                                            </div>
+
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Short Description</label>
+                                                <textarea class="form-control" id="eventDescriptionEdit"
+                                                    rows="3"></textarea>
+                                            </div>
+
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Event Location (Address)</label>
+                                                <textarea class="form-control" id="eventLocationEdit" rows="3"></textarea>
+                                            </div>
+
+                                            <div class="col-md-3 mb-3">
+                                                <label class="form-label">Event Date</label>
+                                                <input class="form-control" id="eventDateEdit" type="date"
+                                                    placeholder="Eg: #000000">
+                                            </div>
+
+                                            <div class="col-md-3 mb-3">
+                                                <label class="form-label">Event Start Time</label>
+                                                <input class="form-control" id="eventStartTimeEdit" type="time"
+                                                    placeholder="Eg: #000000">
+                                            </div>
+
+                                            <div class="col-md-3 mb-3">
+                                                <label class="form-label">Gate Open From</label>
+                                                <input class="form-control" id="eventGateOpenEdit" type="time"
+                                                    placeholder="Eg: #000000">
+                                            </div>
+
+                                            <div class="col-md-3 mb-3">
+                                                <label class="form-label">Gate Open To</label>
+                                                <input class="form-control" id="eventGateCloseEdit" type="time"
+                                                    placeholder="Eg: #000000">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="mb-3">Event Status</h5>
+                                                <div class="d-flex justify-content-between">
+                                                    <!-- <button class="btn btn-warning disabled" disabled>Save Draft</button> -->
+                                                    <button onclick="updateEvent()" class="btn btn-primary">update
+                                                        Event</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="mb-3">Ticket Categories</h5>
+                                                <div class="row" id="ticketCategories"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="mb-3">Seat Chart</h5>
+                                                <div id="imageContainer"
+                                                    class="border-radius-20 image-uploader-container"
+                                                    onclick="openImageInput()">
+                                                    <div class="row text-center p-4 image-uploader">
+                                                        <img src="/assets/img/product-image-uploade.png" class="mb-3" id="eventImage" />
+                                                        <p class="mb-2 font-size-18">Drop your image here, or
+                                                            browse</p>
+                                                        <p class="mb-2 font-size-12 text-secondary">Supports: JPG,
+                                                            JPEG2000, PNG</p>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Input Field Div Start -->
+                                                <input type="file" id="imageInput" accept="image/*" class="d-none"
+                                                    onchange="displayImage()">
+                                                <!-- Input Field Div End -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <footer class="footer mt-auto footer-light">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 small">Copyright &copy; NB Admin 2023</div>
+                                <div class="col-md-6 text-md-right small">
+                                    <a href="#!">Privacy Policy</a>
+                                    &middot;
+                                    <a href="#!">Terms &amp; Conditions</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+        </div>
+        <%- script_tags %>
+
+            <script>
+                function openImageInput() {
+                    var input = document.getElementById('imageInput');
+                    input.click();
+                }
+
+                function displayImage(imageSrc) {
+                    const input = document.getElementById('imageInput');
+                    const container = document.getElementById('imageContainer');
+
+                    const file = input.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            const image = new Image();
+                            image.src = e.target.result;
+                            image.className = "previewImage";
+                            container.innerHTML = '';
+
+                            image.style.width = '100%';
+                            image.style.height = '100%';
+
+                            container.appendChild(image);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                    else if(imageSrc!=undefined){
+                            const image = new Image();
+                            image.src = imageSrc;
+                            image.className = "previewImage";
+                            container.innerHTML = '';
+
+                            image.style.width = '100%';
+                            image.style.height = '100%';
+
+                            container.appendChild(image);
+                    }
+                }
+            </script>
+
+            <script>
+                // Get the current URL
+                var currentUrl = window.location.href;
+                var parts = currentUrl.split('/');
+                var id = parts[parts.length - 1];
+
+                function getEventTicketCategories(){
+                    return new Promise((resolve, reject)=>{
+                        $.ajax({
+                            url: '/api/v1/event/ticket-category/list',
+                            method: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify({eventId:id}),
+                            success: function (data) {
+                                if (data.status === true || data.status === "true") {
+
+                                    resolve(data);
+                                }
+                                else{
+                                    resolve(data);
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                resolve({status:false, message:'error while proccessing ticket categories'});
+                            }
+                        });
+                    });
+                }
+
+                function getCategories() {
+
+                    $.ajax({
+                        url: '/api/v1/tickets_category/list',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: {},
+                        success: async function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                const node = data.data
+
+                                let res=await getEventTicketCategories();
+
+                                let eventTicketIds=[];
+                                if(!res.status){
+                                    iziToast.error({
+                                        title: 'Error',
+                                        message: res.message,
+                                    });
+                                }
+                                else{
+                                    eventTicketIds=res.data.map((elem, index)=>elem.ticket_category_id);
+                                }
+
+                                for (let i = 0; i < node.length; i++) {
+
+                                    document.getElementById("ticketCategories").innerHTML += `
+                                        <div class="col-md-12">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" id="${node[i].id}"
+                                                    type="checkbox"  ${eventTicketIds.includes(node[i].id)?'checked':''}>
+                                                <label class="custom-control-label" for="${node[i].id}">${node[i].name}</label>
+                                            </div>
+                                        </div>
+                                    `;
+                                }
+
+                            } else {
+                                console.log(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                getCategories()
+
+                function getEventDetails() {
+                $.ajax({
+                    url: '/api/v1/event/view',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        "id": id
+                    }),
+                    success: function (data) {
+                        if (data.status === true || data.status === "true") {
+
+                            $('#eventNameEdit').val(data.data.title);
+                            $('#eventDateEdit').val(data.data.date);
+                            $('#eventStartTimeEdit').val(data.data.event_start_time);
+                            $('#eventGateCloseEdit').val(data.data.gate_close_time);
+                            $('#eventGateOpenEdit').val(data.data.gate_open_time);
+                            $('#eventLocationEdit').val(data.data.location);
+                            $('#eventDescriptionEdit').val(data.data.description);
+                            displayImage(data.data.image_url);
+
+                            console.log(data.data);
+
+                        } else {
+                            iziToast.error({
+                                title: 'Error',
+                                message: data.message,
+                            });
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error('Error making the request:', textStatus, errorThrown);
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'An error occurred while processing your request.',
+                        });
+                    }
+                });
+            }
+
+            getEventDetails()
+
+
+                function updateEvent() {
+
+                    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                    var selectedIds = Array.from(checkboxes).map(checkbox => checkbox.id);
+
+                    $.ajax({
+                        url: '/api/v1/event/edit',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "id": id,
+                            "title": $('#eventNameEdit').val(),
+                            "date": $('#eventDateEdit').val(),
+                            "event_start_time": $('#eventStartTimeEdit').val(),
+                            "gate_close_time": $('#eventGateCloseEdit').val(),
+                            "gate_open_time": $('#eventGateOpenEdit').val(),
+                            "location": $('#eventLocationEdit').val(),
+                            "description": $('#eventDescriptionEdit').val(),
+                            "categories": selectedIds
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+
+                                seatChart();
+
+                            } else {
+                                console.log(data);
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+
+                async function seatChart() {
+                    if(document.getElementById("imageInput").files.length>0){
+                        let data = new FormData();
+                        data.append("imageId", 14);
+                        data.append("resultId", id);
+                        data.append("image", document.getElementById("imageInput").files[0]);
+
+                        $.ajax({
+                            url: "/api/upload",
+                            data: data,
+                            method: "post",
+                            mimeType: "multipart/form-data",
+                            contentType: false,
+                            processData: false,
+                            success: function (data) {
+
+                                var data = JSON.parse(data);
+                                if (data.status == "true" || data.status == true) {
+
+                                    document.getElementById("imageInput").value = '';
+
+                                    iziToast.success({
+                                        title: 'Success',
+                                        message: data.message,
+                                    });
+
+                                    setTimeout(() => {
+                                        window.location.href = `/event-edit/${id}`;
+                                    }, 1000);
+
+                                } else {
+                                    iziToast.error({
+                                        timeout: 5000,
+                                        icon: 'fa fa-ban',
+                                        title: 'Error',
+                                        message: data.message,
+                                    });
+
+                                }
+                            },
+
+                            error: function () {
+                                alert("Can not post data");
+                            }
+
+                        });
+                    }
+                    else{
+                        setTimeout(() => {
+                            window.location.href = `/event-edit/${id}`;
+                        }, 1000);
+                    }
+
+                }
+
+            </script>
+</body>
+
+</html>

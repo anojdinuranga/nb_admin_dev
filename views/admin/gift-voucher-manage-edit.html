@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Gift Voucher Management</title>
+    <%-header_tags %>
+</head>
+
+<body class="nav-fixed">
+    <%-top_header %>
+        <div id="layoutSidenav">
+            <%-sidebar %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Gift Voucher Management
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Edit Voucher</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb mb-0 mt-4">
+                                        <li class="breadcrumb-item"><a href="/gift-voucher-manage-list">Gift Voucher Management</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Edit Voucher</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Main page content-->
+                        <div class="container">
+                            <div class="">
+                                <div class="row">
+                                    <div class="col d-flex justify-content-end">
+                                        <button onclick="//updateVoucher()" class="btn btn-primary">Update
+                                            Voucher</button>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Name</label>
+                                        <input min="0" class="form-control" id="voucherNameEdit" type="text">
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Voucher Category</label>
+                                        <div class="form-group">
+                                            <select class="form-control" id="voucherCategoryEdit"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Voucher Count</label>
+                                        <input class="form-control" id="voucherCountEdit" type="number">
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Amount (Rs.)</label>
+                                        <input class="form-control" id="voucherAmountEdit" type="number">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <h6>Extra Details</h6>
+                                        <div>
+                                            <div class="row mb-2">
+                                                <div class="col-md-5" id="optionsContainer"></div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-warning mt-3" onclick="addOption()">Add Option</button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col d-flex justify-content-start">
+                                        <button onclick="updateVoucher()" class="btn btn-primary">Update
+                                            Voucher</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <footer class="footer mt-auto footer-light">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 small">Copyright &copy; NB Admin 2023</div>
+                                <div class="col-md-6 text-md-right small">
+                                    <a href="#!">Privacy Policy</a>
+                                    &middot;
+                                    <a href="#!">Terms &amp; Conditions</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+        </div>
+
+        <input type="hidden" name="" id="categoryID">
+
+        <%- script_tags %>
+
+            <script>
+
+                var inputFieldsValues;
+
+                function addOption(extra_details) {
+                    var containerDiv = document.createElement("div");
+                    containerDiv.className = "option-container mb-4 d-flex gap-4";
+
+                    var inputField = document.createElement("input");
+                    inputField.type = "text";
+
+                    if (extra_details == undefined) {
+                        inputField.value = "";
+                    } else {
+                        inputField.value = extra_details;
+                    }
+
+                    inputField.className = "form-control";
+
+                    var removeButton = document.createElement("button");
+                    removeButton.type = "button";
+                    removeButton.innerHTML = "<i class=\"fa-regular fa-trash-can\"></i>";
+                    removeButton.className = "btn btn-danger ml-2";
+
+                    removeButton.addEventListener("click", function () {
+                        containerDiv.remove();
+                        AllInputFieldValues();
+                    });
+
+                    containerDiv.appendChild(inputField);
+                    containerDiv.appendChild(removeButton);
+
+                    document.getElementById('optionsContainer').appendChild(containerDiv);
+
+                    AllInputFieldValues();
+                }
+
+                function AllInputFieldValues() {
+
+                    console.log("trigerd")
+
+                    var inputFields = document.querySelectorAll('#optionsContainer input');
+                    var inputValues = Array.from(inputFields).map(function (input) {
+                        return input.value;
+                    });
+                    inputFieldsValues = inputValues.join(', ');
+
+                }
+            </script>
+
+            <script>
+                // Get the current URL
+                var currentUrl = window.location.href;
+                var parts = currentUrl.split('/');
+                var id = parts[parts.length - 1];
+
+                // Event View Function Start
+                function getVoucherDetails() {
+
+                    console.log("run")
+
+                    $.ajax({
+                        url: '/api/v1/gift_voucher/view',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "id": id
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+                                $('#voucherNameEdit').val(data.data.name);
+                                setVoucherCategory(document.getElementById('voucherCategoryEdit'), data.data.category);
+                                $('#voucherCountEdit').val(data.data.count);
+                                $('#voucherAmountEdit').val(data.data.amount);
+
+                                var extra_detail = data.data.details
+
+                                var extraDetailsArray = extra_detail.split(', ');
+
+                                for (var i = 0; i < extraDetailsArray.length; i++) {
+                                    var currentDetail = extraDetailsArray[i];
+
+                                    addOption(currentDetail);
+                                }
+
+                                document.getElementById("categoryID").value = data.data.event_ticket_category
+
+
+
+
+                            } else {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+
+                function activeEventList() {
+                    $.ajax({
+                        url: '/api/v1/voucher_category/active/list',
+                        method: 'GET',
+                        dataType: 'json',
+                        data: {},
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+                                console.log(data);
+
+                                let details = data.data;
+
+                                details.forEach(function (detail) {
+
+                                    let option = document.createElement('option');
+                                    option.value = detail.id;
+                                    option.textContent = detail.name;
+                                    document.getElementById('voucherCategoryEdit').appendChild(option);
+
+
+                                });
+
+                            } else {
+                                console.log(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                function setVoucherCategory(element, value){
+                    for (var i = 0; i < element.options.length; i++) {
+                        console.log(element.options[i].value, " ", value)
+                        if (element.options[i].value == value) {
+                            element.options[i].selected =true;
+                        }
+                    }
+                }
+                activeEventList();
+                getVoucherDetails()
+                // Event View Function Start
+
+                // Voucher Edit Function Start
+                function updateVoucher() {
+
+                    var inputFields = document.querySelectorAll('#optionsContainer input');
+                    var inputValues = Array.from(inputFields).map(function (input) {
+                        return input.value;
+                    });
+                    inputFieldsValues = inputValues.join(', ');
+
+                    $.ajax({
+                        url: '/api/v1/gift_voucher/edit',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "id": id,
+                            "name": $('#voucherNameEdit').val(),
+                            "category": $('#voucherCategoryEdit').val(),
+                            "count": $('#voucherCountEdit').val(),
+                            "amount": $('#voucherAmountEdit').val(),
+                            "details": inputFieldsValues
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+
+
+                            } else {
+
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+
+                }
+                // Voucher Edit Function End
+
+                // Ticket Categories Load Function End 
+            </script>
+</body>
+
+</html>

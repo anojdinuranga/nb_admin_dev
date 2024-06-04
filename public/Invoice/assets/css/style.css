@@ -1,0 +1,99 @@
+* {
+    font-size: 16px !important;
+    font-family: Arial;
+}
+
+.invoice-logo {
+    width: 100px;
+}
+
+.back-button {
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    margin: 10px;
+}
+
+.print-button {
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    margin: 10px;
+}  
+
+th {
+    font-weight: 700 !important;
+}
+
+td {
+    background-color: #f5f5f5 !important;
+}
+
+@media print {
+
+    * {
+        font-size: 10px !important;
+        font-family: Arial;
+    }
+
+    span {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    .print-button,
+    .back-button {
+        display: none !important;
+    }
+}
+
+.table-header {
+    font-weight: 300;
+    padding: 5px;
+    border: 2px solid white;
+}
+
+.input-type-1 {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 0px
+}
+
+.footer-color-box {
+    background-color: #222222;
+}
+
+.font-size-22 {
+    font-size: 22px;
+}
+
+.font-size-18 {
+    font-size: 18px;
+}
+
+.font-size-16 {
+    font-size: 16px;
+}
+
+.font-size-14 {
+    font-size: 14px;
+}
+
+.font-weight {
+    font-weight: 700;
+}
+
+.table-header {
+    background-color: black;
+}
+
+.margin-top-80 {
+    margin-top: 80px;
+}
+
+.input-type-1:active {
+    border: none;
+}

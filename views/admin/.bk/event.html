@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Event Add</title>
+    <!-- Header Link File Start -->
+    <%-header_tags %>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="https://api.opencagedata.com/geocode/v1/leaflet.js?key=YOUR_OPENCAGE_API_KEY"></script>
+</head>
+<style>
+    /* Set the map container height */
+    #map {
+        height: 300px;
+    }
+</style>
+
+<body class="nav-fixed">
+
+    <!-- Header Div Start -->
+    <%-top_header %>
+        <!-- Header Div End -->
+
+        <!-- Body Content Div Start -->
+        <div id="layoutSidenav">
+
+            <!-- Side-Menu Div Start -->
+            <%-sidebar %>
+                <!-- Side-Menu Div End -->
+
+                <!-- page content Start-->
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container mt-5 mb-4">
+
+                            <!-- Title Div Start -->
+                            <div class="col-12 mb-4">
+                                <label class="fs-2">Event</label>
+                            </div>
+                            <!-- Title Div End -->
+
+                            <!-- Event Add Form Start -->
+                            <div class="col-12" id="card_page_1">
+                                <div class="row">
+
+
+                                    <!-- Title Add Div Start -->
+                                    <div class="col-12 mb-3">
+                                        <label class="form-label">Title</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                    <!-- Title Add Div End -->
+
+                                    <!-- Sub_title Add Div Start -->
+                                    <div class="col-12 mb-3">
+                                        <label class="form-label">Sub Title</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                    <!-- Sub_title Add Div End -->
+
+                                    <!-- Date Div Start -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Date</label>
+                                        <input type="date" class="form-control" />
+                                    </div>
+                                    <!-- Date Div End -->
+
+                                    <!-- Time Div Start -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Time</label>
+                                        <input type="time" class="form-control" />
+                                    </div>
+                                    <!-- Time Div End -->
+
+                                    <!-- Short Description Div Start -->
+                                    <div class="col-12 mb-3">
+                                        <label class="form-label">Description</label>
+                                        <textarea type="text" class="form-control"></textarea>
+                                    </div>
+                                    <!-- Short Description Div End -->
+
+                                    <!-- Location Add Div Start -->
+                                    <div class="col-12 mb-4">
+                                        <label class="form-label">Location</label>
+
+                                        <!-- Your map container -->
+                                        <div id="map"></div>
+
+                                    </div>
+                                    <!-- Location Add Div End -->
+
+                                    <!-- Image Div Start -->
+                                    <div class="col-12 mb-4">
+                                        <div class="row">
+                                            <label class="form-label mb-2">Event Image</label>
+
+                                            <div id="imageContainer" class="card border-radius-20 image-uploader-card"
+                                                onclick="openImageInput()">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <div class="d-flex justify-content-center mb-4">
+                                                        <img src="/assets/images/product-image-uploade.png" />
+                                                    </div>
+
+                                                    <label class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</label>
+                                                    <label class="mb-2 font-size-12 text-secondary">Supports: JPG,
+                                                        JPEG2000, PNG</label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="imageInput" accept="image/*" class="d-none"
+                                                onchange="displayImage()">
+                                            <!-- Input Field Div End -->
+                                        </div>
+                                    </div>
+                                    <!-- Image Div End -->
+
+                                    <!-- Button Div Start -->
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button class="btn btn-primary" onclick="next_page();">Next</button>
+                                    </div>
+                                    <!-- Button Div End -->
+
+                                </div>
+                            </div>
+                            <!-- Event Add Form End -->
+
+                            <!-- Ticket Category Div Start -->
+                            <div class="col-12 d-none" id="card_page_2">
+                                <div class="row">
+
+                                    <!-- Title Div Start -->
+                                    <div class="col-12 mb-5 d-flex justify-content-between">
+                                        <label class="form-label fs-4">Ticket Category Table & Seat</label>
+                                        <button class="btn btn-primary" onclick="addNewForm()">Add New Category</button>
+                                    </div>
+                                    <!-- Title Div End -->
+
+                                    <!-- New Ticket Category Div Start -->
+                                    <div class="col-12 mb-4">
+                                        <div class="row">
+
+                                            <!-- Option Div Start -->
+                                            <div class="col-12 mb-4">
+                                                <div class="row">
+
+                                                    <!-- Ticket Category Count Div Start -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="form-label">Ticket
+                                                            Category</label>
+
+                                                        <select class="form-control">
+                                                            <option>Ticket Category 01</option>
+                                                            <option>Ticket Category 01</option>
+                                                            <option>Ticket Category 01</option>
+                                                        </select>
+                                                    </div>
+                                                    <!-- Ticket Category Count Div End -->
+
+                                                    <!-- Table Count Div Start -->
+                                                    <div class="col-md-3 mb-3">
+                                                        <label class="form-label">Table</label>
+
+                                                        <input class="form-control" placeholder="Table Count">
+                                                    </div>
+                                                    <!-- Table Count Div End -->
+
+                                                    <!-- Seat Count Div Start -->
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Seat</label>
+
+                                                        <input class="form-control" placeholder="Seat Count">
+                                                    </div>
+                                                    <!-- Seat Count Div End -->
+
+                                                </div>
+                                            </div>
+                                            <!-- Option Div End -->
+
+                                            <!-- Option Div Start -->
+                                            <div class="col-12">
+                                                <div class="row" id="form_Container">
+                                                </div>
+                                            </div>
+                                            <!-- Option Div End -->
+
+                                        </div>
+                                    </div>
+                                    <!--New Ticket Category Div End -->
+
+                                    <!-- Button Div Start -->
+                                    <div class="col-12 d-flex justify-content-between mt-5">
+                                        <button class="btn btn-warning text-white" onclick="back_page();">Back</button>
+                                        <a href="/table-and-seat" class="btn btn-primary">Next</a>
+                                    </div>
+                                    <!-- Button Div End -->
+
+                                </div>
+                            </div>
+                            <!-- Ticket Category Div End -->
+
+                        </div>
+                    </main>
+                </div>
+                <!-- page content End-->
+
+        </div>
+        <!-- Body Content Div End -->
+
+
+        <!-- Script Tag Start -->
+        <%- script_tags %>
+            <!-- Script Tag End -->
+
+            <!-- Generate Location Div Start -->
+            <script>
+                var mymap = L.map('map').setView([51.505, -0.09], 13);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(mymap);
+
+                var marker = L.marker([51.5, -0.09]).addTo(mymap)
+                    .bindPopup('A sample marker!');
+
+                function onMapClick(e) {
+                    marker.setLatLng(e.latlng);
+                    marker.bindPopup("You clicked at " + e.latlng.toString()).openPopup();
+
+                    L.Control.Geocoder.opencage('YOUR_OPENCAGE_API_KEY').reverse(e.latlng, mymap.options.crs.scale(mymap.getZoom()), results => {
+                        if (results && results.length > 0) {
+                            document.getElementById('address-display').innerHTML = 'Clicked Address: ' + results[0].name;
+                        } else {
+                            document.getElementById('address-display').innerHTML = '';
+                        }
+                    });
+                }
+
+                // Attach the click event listener to the map
+                mymap.on('click', onMapClick);
+            </script>
+            <!-- Generate Location Div End -->
+
+            <!-- Event Image Add Function Start -->
+            <script>
+                function openImageInput() {
+                    var input = document.getElementById('imageInput');
+                    input.click();
+                }
+
+                function displayImage() {
+                    const input = document.getElementById('imageInput');
+                    const container = document.getElementById('imageContainer');
+
+                    const file = input.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            const image = new Image();
+                            image.src = e.target.result;
+                            image.className = "previewImage";
+                            container.innerHTML = '';
+                            container.appendChild(image);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                }
+            </script>
+            <!-- Event Image Add Function End -->
+
+            <!-- Next Page And Back To Page Function Start-->
+            <script>
+                function next_page() {
+
+                    document.getElementById("card_page_1").classList.add("d-none");
+                    document.getElementById("card_page_2").classList.remove("d-none");
+
+                }
+
+                function back_page() {
+
+                    document.getElementById("card_page_1").classList.remove("d-none");
+                    document.getElementById("card_page_2").classList.add("d-none");
+
+                }
+            </script>
+            <!-- Next Page And Back To Page Function End-->
+
+            <!-- Ticket Category Function Start -->
+            <script>
+                var formCount = 0; // Counter to track the number of forms
+
+                function addNewForm() {
+                    formCount++; // Increment the form count
+
+                    // Create a new form container div
+                    var formContainerDiv = document.createElement("div");
+                    formContainerDiv.className = "mb-4 col-12";
+                    formContainerDiv.id = "formContainer_" + formCount; // Unique ID for each form container
+
+                    // Create new select element
+                    var selectElement = document.createElement("select");
+                    selectElement.className = "form-control mb-3";
+                    selectElement.id = "select_" + formCount; // Unique ID for each select element
+                    var option1 = document.createElement("option");
+                    option1.text = "Ticket Category 01";
+                    var option2 = document.createElement("option");
+                    option2.text = "Ticket Category 02";
+                    selectElement.add(option1);
+                    selectElement.add(option2);
+
+                    // Create first input field
+                    var input1 = document.createElement("input");
+                    input1.type = "text";
+                    input1.className = "form-control mb-3";
+                    input1.placeholder = "Table Count";
+                    input1.id = "input1_" + formCount; // Unique ID for each input element
+
+                    // Create second input field
+                    var input2 = document.createElement("input");
+                    input2.type = "text";
+                    input2.className = "form-control mb-3";
+                    input2.placeholder = "Seat Count";
+                    input2.id = "input2_" + formCount; // Unique ID for each input element
+
+                    // Create label for the select element
+                    var labelSelect = document.createElement("label");
+                    labelSelect.className = "form-label";
+                    labelSelect.innerHTML = "Ticket Category";
+
+                    // Create label for the first input element
+                    var labelInput1 = document.createElement("label");
+                    labelInput1.className = "form-label";
+                    labelInput1.innerHTML = "Table";
+
+                    // Create label for the second input element
+                    var labelInput2 = document.createElement("label");
+                    labelInput2.className = "form-label";
+                    labelInput2.innerHTML = "Seat";
+
+                    // Create remove button
+                    var removeButton = document.createElement("button");
+                    removeButton.className = "btn btn-danger";
+                    removeButton.innerHTML = "Remove";
+                    removeButton.onclick = function () {
+                        removeForm(formContainerDiv.id);
+                    };
+
+                    var div_main = document.createElement("div");
+                    div_main.className = "row";
+
+                    var div_1 = document.createElement("div");
+                    div_1.className = "col-md-6";
+
+                    var div_2 = document.createElement("div");
+                    div_2.className = "col-md-3";
+
+                    var div_3 = document.createElement("div");
+                    div_3.className = "col-md-3";
+
+                    var div_4 = document.createElement("div");
+                    div_4.className = "col-12 d-flex justify-content-end";
+
+
+                    // Append elements to form container
+                    div_1.appendChild(labelSelect);
+                    div_1.appendChild(selectElement);
+                    div_2.appendChild(labelInput1);
+                    div_2.appendChild(input1);
+                    div_3.appendChild(labelInput2);
+                    div_3.appendChild(input2);
+                    div_4.appendChild(removeButton);
+
+                    // Append elements to form container
+                    div_main.appendChild(div_1);
+                    div_main.appendChild(div_2);
+                    div_main.appendChild(div_3);
+                    div_main.appendChild(div_4);
+
+                    formContainerDiv.appendChild(div_main);
+
+                    // Append form container to the main container
+                    document.getElementById("form_Container").appendChild(formContainerDiv);
+                }
+
+                function removeForm(formId) {
+                    var formToRemove = document.getElementById(formId);
+                    if (formToRemove) {
+                        formToRemove.remove();
+                    }
+                }
+            </script>
+            <!-- Ticket Category Function End -->
+
+</body>
+
+</html>

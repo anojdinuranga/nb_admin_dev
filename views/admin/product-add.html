@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Product Add</title>
+    <!-- Header Link File Start -->
+    <%-header_tags %>
+        <!-- Header Link File End -->
+</head>
+
+<body class="nav-fixed">
+
+    <!-- Header Div Start -->
+    <%-top_header %>
+        <!-- Header Div End -->
+
+        <!-- Body Content Div Start -->
+        <div id="layoutSidenav">
+
+            <!-- Side-Menu Div Start -->
+            <%-sidebar %>
+                <!-- Side-Menu Div End -->
+
+                <!-- Body-Content Div Start -->
+                <div id="layoutSidenav_content">
+                    <main>
+                        <!-- Page Title Div Start -->
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Product Add
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Create Product</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb mb-0 mt-4">
+                                        <li class="breadcrumb-item"><a href="/event-management">Product Management</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Product Add</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Page Title Div End -->
+
+                        <!-- page content Start-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Title</label>
+
+                                            <input type="text" class="form-control" placeholder="Product Title"
+                                                id="title" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+
+                                        <!-- Select Category Div Start -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">Select Category</label>
+
+                                            <select class="form-control" id="category"
+                                                onchange="productSubCategory(this.value)">
+                                                <option selected disabled>Select Category</option>
+                                            </select>
+                                        </div>
+                                        <!-- Select Category Div End -->
+
+                                        <!-- Select Category Div Start -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">Select Sub Category</label>
+
+                                            <select class="form-control" id="subCategory"
+                                                onchange="productSubCategoryAttributes()">
+                                                <option selected disabled>Select Sub Category</option>
+                                            </select>
+                                        </div>
+                                        <!-- Select Category Div End -->
+
+                                        <!-- Price Div Start -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">Price</label>
+
+                                            <input type="number" class="form-control" placeholder="Enter Price"
+                                                id="price" min="0" />
+                                        </div>
+                                        <!-- Price Div End -->
+
+                                        <!-- Color Select Div Start -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">Color</label>
+                                            <select class="form-control" id="color">
+                                                <option>Select Color</option>
+                                            </select>
+                                        </div>
+                                        <!-- Color Select Div End -->
+
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Attributes</label>
+                                            <div class="row" id="assignAttributes">
+                                            </div>
+                                        </div>
+
+                                        <!-- Short Description Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Short Description</label>
+
+                                            <textarea type="text" class="form-control"
+                                                placeholder="Type Here Short Description"
+                                                id="short_description"></textarea>
+                                        </div>
+                                        <!-- Short Description Div End -->
+
+                                        <!-- Long Description Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Details</label>
+
+                                            <textarea type="text" class="form-control"
+                                                placeholder="Type Here Long Description"
+                                                id="long_description"></textarea>
+                                        </div>
+                                        <!-- Long Description Div End -->
+
+                                        <!-- Size And Fit Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Size And Fit</label>
+                                            <textarea type="text" class="form-control" placeholder="Type Here"
+                                                id="size_and_fit"></textarea>
+                                        </div>
+                                        <!-- Size And Fit Div End -->
+
+                                        <!-- Features Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Features</label>
+                                            <textarea type="text" class="form-control" placeholder="Type Here"
+                                                id="features"></textarea>
+                                        </div>
+                                        <!-- Features Div End -->
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Add Product</h5>
+                                            <div class="d-flex justify-content-between">
+                                                <button class="d-none btn btn-warning disabled" disabled>Save
+                                                    Draft</button>
+                                                <button onclick="addProduct()" class="btn btn-primary"
+                                                    id="publish-btn">Publish</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Feature image -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Feature Images</h5>
+                                            <div id="imageContainer" class="border-radius-20 image-uploader-container"
+                                                onclick="openImageInput()">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/product-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: AVIF</p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="productImage" accept="image/*" class="d-none"
+                                                onchange="displayImage()">
+                                            <!-- Input Field Div End -->
+                                        </div>
+                                    </div>
+                                    <!-- Feature image -->
+
+                                    <!-- Product images -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Product Images</h5>
+                                            <div id="" class="border-radius-20 image-uploader-container"
+                                                onclick="openProductImageInput()">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/product-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: AVIF</p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="productsImage" accept="image/*" class="d-none"
+                                                onchange="displayProductImage()" multiple>
+                                            <!-- Input Field Div End -->
+
+                                            <!-- Image Preview Div Start -->
+                                            <div class="">
+                                                <div class="row " id="product-images"></div>
+                                                <div id="imgInputs"></div>
+                                            </div>
+                                            <!-- Image Preview Div End -->
+                                        </div>
+
+                                    </div>
+                                    <!-- Product images -->
+
+
+
+                                    <!-- size chart images -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Size Guid Images</h5>
+                                            <div id="sizeImageContainer"
+                                                class="border-radius-20 image-uploader-container"
+                                                onclick="openSizeImageInput()">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/product-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: AVIF</p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="sizeImage" accept="image/*" class="d-none"
+                                                onchange="displaySizeImage()" multiple>
+                                            <!-- Input Field Div End -->
+
+                                            <!-- Image Preview Div Start -->
+                                            <div class="">
+                                                <div class="row " id="size-product-images"></div>
+                                                <div id="sizeImgInputs"></div>
+                                            </div>
+                                            <!-- Image Preview Div End -->
+                                        </div>
+
+                                    </div>
+                                    <!-- size chart images -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- page content End-->
+                    </main>
+
+
+                </div>
+                <!-- Body-Content Div End -->
+        </div>
+        <!-- Body Content Div End -->
+
+
+        <!-- Script Tag Start -->
+        <%- script_tags %>
+            <!-- Script Tag End -->
+
+            <script>
+
+                let assignedAttribute = [];
+
+                async function assignedAttributes() {
+                    let attributes = document.getElementsByClassName("assignAttributeCheck");
+                    assignedAttribute = [];
+                    await new Promise(resolve => {
+                        if (attributes.length === 0) resolve(true);
+                        for (let i = 0; i < attributes.length; i++) {
+                            if (attributes[i].checked) {
+                                let item = {
+                                    attributeId: attributes[i].value,
+                                    qty: document.getElementById("assignAttributeQty" + attributes[i].value).value
+                                }
+                                assignedAttribute.push(item);
+                            }
+                            if (attributes.length === i + 1) {
+                                resolve(true);
+                            }
+                        }
+                    });
+                    return true;
+                }
+
+                function productSubCategoryAttributes() {
+
+                    $.ajax({
+                        url: '/api/v1/product_attributes/subcategory-wise',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            subCategoryId: document.getElementById("subCategory").value
+                        },
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                let details = data.data;
+
+                                document.getElementById('assignAttributes').innerHTML = "";
+
+                                details.forEach(function (detail) {
+
+                                    document.getElementById('assignAttributes').innerHTML += `
+                                    <div class="col-md-2">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input assignAttributeCheck" value="${detail.id}" id="assignAttributeCheck${detail.id}" type="checkbox">
+                                            <label class="custom-control-label"
+                                                for="assignAttributeCheck${detail.id}">${detail.name}</label>
+                                        </div>
+                                        <input class="form-control mt-2" type="number" min="0"
+                                            placeholder="Quantity" id="assignAttributeQty${detail.id}">
+                                    </div>`;
+
+                                });
+
+                            } else {
+                                console.log(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+
+                function productSubCategory(value) {
+
+                    $.ajax({
+                        url: '/api/v1/product_sub_category/category-list',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            category_Id: value
+                        },
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                let details = data.data;
+
+                                document.getElementById('subCategory').innerHTML = "";
+
+                                details.forEach(function (detail) {
+
+                                    let option = document.createElement('option');
+
+                                    option.value = detail.id;
+
+                                    option.textContent = detail.name;
+
+                                    document.getElementById('subCategory').appendChild(option);
+                                });
+                                setTimeout(() => { productSubCategoryAttributes() }, 1000);
+
+                            } else {
+                                console.log(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+
+                let productImageArray = [];
+
+                function openImageInput() {
+                    var input = document.getElementById('productImage');
+                    input.click();
+                }
+                function openSizeImageInput() {
+                    var input = document.getElementById('sizeImage');
+                    input.click();
+                }
+                function openProductImageInput() {
+                    var input = document.getElementById('productsImage');
+                    input.click();
+                }
+
+                function displayImage() {
+                    const input = document.getElementById('productImage');
+                    const container = document.getElementById('imageContainer');
+
+                    const file = input.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            const image = new Image();
+                            image.src = e.target.result;
+                            image.className = "previewImage";
+                            container.innerHTML = '';
+
+                            image.style.width = '100%';
+                            image.style.height = '100%';
+
+                            container.appendChild(image);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                }
+
+
+                function displaySizeImage() {
+                    const input = document.getElementById('sizeImage');
+                    const container = document.getElementById('sizeImageContainer');
+
+                    const file = input.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            const image = new Image();
+                            image.src = e.target.result;
+                            image.className = "previewImage";
+                            container.innerHTML = '';
+
+                            image.style.width = '100%';
+                            image.style.height = '100%';
+
+                            container.appendChild(image);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                }
+
+                function displayProductImage() {
+                    const input = document.getElementById('productsImage');
+                    const container = document.getElementById('product-images');
+
+                    // Loop through each selected file
+                    for (let i = 0; i < input.files.length; i++) {
+                        const file = input.files[i];
+
+                        if (file) {
+                            const reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                const image = new Image();
+                                image.src = e.target.result;
+                                image.className = "previewImage";
+
+                                image.style.width = '100%';
+                                image.style.height = '100%';
+                                let id = new Date().getTime() + i; // Ensure unique ID for each image
+                                let imageName = `Image ${i + 1}`; // You can set the image name as desired
+
+                                let imageChild = `
+                                <div class="col-md-6 product-image-container">
+                                    <div class="border-radius-20" onclick="openProductImageInput()">
+                                        <div class="row text-center p-3 product-image-view">
+                                            <img id="${id}" data-name="${imageName}" src="" width="100%" class="mb-3"/>
+                                        </div>
+                                    </div>   
+                                    <button class="btn btn-sm btn-danger product-image-delete" onclick="productImageDelete(this, '${imageName}')">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                    <input type="file" id="${id}I" class="d-none productImg">
+                                </div>`;
+
+                                container.innerHTML += imageChild;
+                                document.getElementById(id).src = e.target.result;
+                                document.getElementById(id).setAttribute('data-name', imageName); // Set the image name as an attribute
+                                productImageArray.push({ file: file, name: imageName });
+                            };
+
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                }
+
+                function productImageDelete(element, imageName) {
+                    element.parentElement.remove();
+                    productImageArray = productImageArray.filter(item => item.name != imageName);
+                }
+            </script>
+
+            <script>
+                // Text Editor Start
+                tinymce.init({
+                    selector: '#long_description, #size_and_fit , #features ',
+                    height: 250,
+                    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | code',
+                });
+                // Text Editor End 
+
+                function uploadProfileImage() {
+                    alert('Profile Image uploaded successfully!');
+                }
+                // Features Image Add Function End 
+
+
+                // Products Image Add Function Start
+                document.addEventListener('DOMContentLoaded', function () {
+                    document.getElementById('imageInput').addEventListener('change', function () {
+                        previewImages();
+                    });
+                });
+
+                function previewImages() {
+                    const input = document.getElementById('imageInput');
+                    const gallery = document.getElementById('product-images');
+
+                    const maxImages = 6;
+                    const remainingSlots = maxImages - gallery.childElementCount;
+
+                    for (let i = 0; i < Math.min(input.files.length, remainingSlots); i++) {
+                        const file = input.files[i];
+
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const imgElement = document.createElement('img');
+                            imgElement.className = 'product-image-view';
+                            imgElement.src = e.target.result;
+                            imgElement.alt = 'Uploaded Image';
+
+                            const removeBtn = document.createElement('button');
+                            removeBtn.className = 'btn btn-danger , mt-4';
+                            removeBtn.innerHTML = 'Remove&nbsp;<i class="fa-solid fa-xmark"></i>';
+                            removeBtn.addEventListener('click', function () {
+                                removeImage(imgElement);
+                            });
+
+                            const product_images_div = document.createElement('div');
+                            product_images_div.className = 'col-md-2';
+
+                            product_images_div.appendChild(imgElement);
+                            product_images_div.appendChild(removeBtn);
+
+                            gallery.appendChild(product_images_div);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+
+                    input.value = '';
+                }
+
+                function removeImage(imgElement) {
+                    const gallery = document.getElementById('product-images');
+                    gallery.removeChild(imgElement.parentElement);
+                }
+
+                function uploadImages() {
+                    alert('Images uploaded successfully!');
+                }
+                // Products Image Add Function End
+
+                function disableBtn() {
+                    document.getElementById('publish-btn').disabled = true;
+                    document.getElementById('publish-btn').innerHTML = "Publishing...";
+                }
+
+                function enableBtn() {
+                    document.getElementById('publish-btn').disabled = false;
+                    document.getElementById('publish-btn').innerHTML = "Publish";
+                }
+
+                // Product Add Function Start
+                async function addProduct() {
+                    disableBtn()
+                    if (document.getElementById("productImage").files.length === 0) {
+                        iziToast.error({
+                            timeout: 5000,
+                            icon: 'fa fa-ban',
+                            title: 'Error',
+                            message: "Please Select a Product feature Image",
+                        });
+                        enableBtn()
+                        return;
+                    }
+                    if (productImageArray.length === 0) {
+                        iziToast.error({
+                            timeout: 5000,
+                            icon: 'fa fa-ban',
+                            title: 'Error',
+                            message: "Please Select 1 or more Product Images",
+                        });
+                        enableBtn()
+                        return;
+                    }
+
+                    // if (document.getElementById("sizeImage").files.length === 0) {
+                    //     // productImagesChange(productId)
+                    //     iziToast.error({
+                    //         timeout: 5000,
+                    //         icon: 'fa fa-ban',
+                    //         title: 'Error',
+                    //         message: "Please Select a Product size Image",
+                    //     });
+                    //     enableBtn()
+                    //     return;
+                    // }
+
+                    let long_description = tinymce.get('long_description').getContent();
+                    let size_and_fit = tinymce.get('size_and_fit').getContent();
+                    let features = tinymce.get('features').getContent();
+                    await assignedAttributes();
+
+                    $.ajax({
+                        url: '/api/v1/product/add',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+
+                            "title": $('#title').val(),
+                            "category": $('#category').val(),
+                            "subCategory": $('#subCategory').val(),
+                            "price": $('#price').val(),
+                            "color": $('#color').val(),
+                            "shortDescription": $('#short_description').val(),
+                            "longDescription": long_description,
+                            "sizeAndFit": size_and_fit,
+                            "features": features,
+                            "attributes": assignedAttribute
+
+                        }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                productImageChange(data.data.insertId);
+
+                            } else {
+                                console.log(data);
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+
+                                enableBtn()
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                // Product Add Function End
+
+                // Product Category-List Function Start
+                function productCategoryList() {
+
+                    $.ajax({
+                        url: '/api/v1/product_category/list',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {},
+
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+                                console.log(data);
+
+                                let details = data.data;
+
+                                details.forEach(function (detail) {
+
+                                    let option = document.createElement('option');
+                                    option.value = detail.id;
+                                    option.textContent = detail.name;
+                                    document.getElementById('category').appendChild(option);
+
+
+                                });
+
+                            } else {
+                                console.log(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+
+                }
+                productCategoryList();
+                // Product Category-List Function End
+
+                // Product Color Function Start
+                function productColorList() {
+
+                    $.ajax({
+                        url: '/api/v1/product_color/active-list',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            "status": 1
+                        },
+
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+                                console.log(data);
+
+                                let details = data.data;
+
+                                details.forEach(function (detail) {
+
+                                    let option = document.createElement('option');
+                                    option.value = detail.id;
+                                    option.textContent = detail.name;
+                                    document.getElementById('color').appendChild(option);
+
+
+                                });
+
+                            } else {
+                                console.log(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+
+                }
+                productColorList();
+                // Product Color Function End
+
+                async function productImageChange(productId) {
+
+                    if (document.getElementById("productImage").files.length === 0) {
+                        iziToast.error({
+                            timeout: 5000,
+                            icon: 'fa fa-ban',
+                            title: 'Error',
+                            message: "Please Select a Product feature Image",
+                        });
+                        return;
+                    }
+
+                    let data = new FormData();
+                    data.append("imageId", 1);
+                    data.append("resultId", productId);
+                    data.append("image", document.getElementById("productImage").files[0]);
+
+                    $.ajax({
+                        url: "/api/upload",
+                        data: data,
+                        method: "post",
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+
+                            productImagesChange(productId)
+
+                            var data = JSON.parse(data);
+                            if (data.status == "true" || data.status == true) {
+
+                                document.getElementById("productImage").value = '';
+
+                            } else {
+                                iziToast.error({
+                                    timeout: 5000,
+                                    icon: 'fa fa-ban',
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                                enableBtn()
+
+
+                            }
+                        },
+                        error: function () {
+                            alert("Can not post data");
+                        }
+                    });
+
+                }
+
+
+                async function productImagesChange(productId) {
+
+                    // Create a new sorted array without modifying the original one
+                    let newArray = [...productImageArray].sort((a, b) => {
+
+
+                        const nameA = a.name.toString().toLowerCase();
+                        const nameB = b.name.toString().toLowerCase();
+                        return nameA.localeCompare(nameB);
+                    });
+
+                    if (newArray.length === 0) {
+                        iziToast.error({
+                            timeout: 5000,
+                            icon: 'fa fa-ban',
+                            title: 'Error',
+                            message: "Please Select 1 or more Product Images",
+                        });
+                        return;
+                    }
+
+                    for (let i = 0; i < newArray.length; i++) {
+
+
+                        let data = new FormData();
+                        data.append("imageId", 2);
+                        data.append("resultId", productId);
+                        data.append("image", newArray[i].file);
+
+
+                        $.ajax({
+                            url: "/api/upload",
+                            data: data,
+                            method: "post",
+                            mimeType: "multipart/form-data",
+                            contentType: false,
+                            processData: false,
+                            success: function (data) {
+
+                                var data = JSON.parse(data);
+                                if (data.status == "true" || data.status == true) {
+
+
+
+                                } else {
+                                    // iziToast.error({
+                                    //     timeout: 5000,
+                                    //     icon: 'fa fa-ban',
+                                    //     title: 'Error',
+                                    //     message: data.message,
+                                    // });
+
+
+                                }
+
+                                if (i === productImageArray.length - 1) {
+                                    iziToast.success({
+                                        timeout: 5000,
+                                        icon: 'fa fa-check',
+                                        title: 'Done',
+                                        message: "Success",
+                                    });
+                                    setTimeout(() => { location.href = ""; }, 500)
+                                }
+                            },
+                            error: function () {
+                                alert("Can not post data");
+                                enableBtn()
+                            }
+                        });
+
+                    }
+
+                }
+
+
+
+                async function productSizeImageChange(productId) {
+
+                    if (document.getElementById("sizeImage").files.length === 0) {
+                        enableBtn()
+                        iziToast.success({
+                            timeout: 5000,
+                            icon: 'fa fa-check',
+                            title: 'Done',
+                            message: "Success",
+                        });
+                        setTimeout(() => { location.href = ""; }, 500)
+                    } else {
+
+                        let data = new FormData();
+                        data.append("imageId", 8);
+                        data.append("resultId", productId);
+                        data.append("image", document.getElementById("sizeImage").files[0]);
+
+                        $.ajax({
+                            url: "/api/upload",
+                            data: data,
+                            method: "post",
+                            mimeType: "multipart/form-data",
+                            contentType: false,
+                            processData: false,
+                            success: function (data) {
+
+                                productImagesChange(productId);
+
+                                var data = JSON.parse(data);
+                                if (data.status == "true" || data.status == true) {
+
+                                    // iziToast.success({
+                                    //     timeout: 5000,
+                                    //     icon: 'fa fa-check',
+                                    //     title: 'Done',
+                                    //     message: "Success",
+                                    // });
+
+                                    document.getElementById("sizeImage").value = '';
+
+                                } else {
+                                    iziToast.error({
+                                        timeout: 5000,
+                                        icon: 'fa fa-ban',
+                                        title: 'Error',
+                                        message: data.message,
+                                    });
+                                    enableBtn()
+
+                                }
+                            },
+                            error: function () {
+                                alert("Can not post data");
+                            }
+                        });
+                    }
+                }
+
+
+
+            </script>
+
+</body>
+
+</html>

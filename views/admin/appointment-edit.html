@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Appointment Update</title>
+    <!-- Header Link File Start -->
+    <%-header_tags %>
+    <!-- Header Link File End -->
+</head>
+
+<body class="nav-fixed">
+
+    <!-- Header Div Start -->
+    <%-top_header %>
+        <!-- Header Div End -->
+
+        <!-- Body Content Div Start -->
+        <div id="layoutSidenav">
+
+            <!-- Side-Menu Div Start -->
+            <%-sidebar %>
+                <!-- Side-Menu Div End -->
+
+                <!-- Body-Content Div Start -->
+                <div id="layoutSidenav_content">
+                    <main>
+                        <!-- Page Title Div Start -->
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Appointment Update
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Update Appointment</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb mb-0 mt-4">
+                                        <li class="breadcrumb-item"><a href="/event-management">Appointment Management</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Appointment Update</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Page Title Div End -->
+
+                        <!-- page content Start-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label">Appointment Date</label>
+                                            <input type="date" class="form-control"
+                                                id="appointmentDate" />
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label">Time</label>
+                                            <input type="time" class="form-control"
+                                                id="statingTime" />
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" class="form-control" placeholder="First Name"
+                                                id="firstName" />
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label">Last Name</label>
+
+                                            <input type="text" class="form-control" placeholder="Last Name"
+                                                id="lastName" />
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" placeholder="E-mail"
+                                                id="email" />
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label">Phone</label>
+                                            <input type="phone" class="form-control" placeholder="Phone Number"
+                                                id="phone" />
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label">Reason</label>
+                                            <select class="form-control" placeholder="Phone Number" id="reason">
+                                                <option value="Place an order">Place an order</option>
+                                                <option value="For the Fit-on">For the Fit-on</option>
+                                                <option value="Alteration">Alteration</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label">Invoice No</label>
+                                            <input type="text" class="form-control" placeholder="Invoice Number"
+                                                id="invoiceNo" />
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label">Address</label>
+                                            <textarea id="address" class="form-control" rows="6"></textarea>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label">Note</label>
+                                            <textarea id="reasonNote" class="form-control" rows="6"></textarea>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Update Appointment</h5>
+                                            <div class="d-flex justify-content-between">
+                                                <button onclick="addAppointment()" class="btn btn-primary">Publish</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- page content End-->
+                    </main>
+                </div>
+                <!-- Body-Content Div End -->
+        </div>
+        <!-- Body Content Div End -->
+
+
+        <!-- Script Tag Start -->
+        <%- script_tags %>
+            <!-- Script Tag End -->
+
+            <script>
+
+                var currentUrl = window.location.href;
+                var parts = currentUrl.split('/');
+                var AppointmentId = parts[parts.length - 1];
+
+                // Appointment Add Function Start
+                function addAppointment() {
+                    let startTime = $('#statingTime').val().substring(0,2);
+                    $.ajax({
+                        url: '/api/v1/appointment_booking/edit',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "id": AppointmentId,
+                            "firstName": $('#firstName').val(),
+                            "lastName": $('#lastName').val(),
+                            "email": $('#email').val(),
+                            "phone": $('#phone').val(),
+                            "address": $('#address').val(),
+                            "reason": $('#reason').val(),
+                            "invoiceNo": $('#invoiceNo').val(),
+                            "reasonNote": $('#reasonNote').val(),
+                            "appointmentDate": $('#appointmentDate').val(),
+                            "statingTime": startTime
+                            }),
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+
+                            } else {
+                                console.log(data);
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                // Appointment Add Function End
+
+                function AppointmentView() {
+                    $.ajax({
+                        url: '/api/v1/appointment_booking/view',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            "id": AppointmentId
+                        },
+
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+                                $('#firstName').val(data.data.first_name);
+                                $('#lastName').val(data.data.last_name);
+                                $('#email').val(data.data.email);
+                                $('#phone').val(data.data.phone);
+                                $('#address').val(data.data.address);
+                                $('#reason').val(data.data.reason);
+                                $('#invoiceNo').val(data.data.invoice_no);
+                                $('#reasonNote').val(data.data.reason_note);
+                                $('#appointmentDate').val(data.data.appointment_date);
+                                $('#statingTime').val(data.data.stating_time+":00");
+
+                            } else {
+                                console.log(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                AppointmentView()
+
+            </script>
+
+</body>
+
+</html>

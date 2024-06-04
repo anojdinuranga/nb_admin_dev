@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Fabric Edit</title>
+    <!-- Header Link File Start -->
+    <%-header_tags %>
+        <!-- Header Link File End -->
+</head>
+
+<body class="nav-fixed">
+
+    <!-- Header Div Start -->
+    <%-top_header %>
+        <!-- Header Div End -->
+
+        <!-- Body Content Div Start -->
+        <div id="layoutSidenav">
+
+            <!-- Side-Menu Div Start -->
+            <%-sidebar %>
+                <!-- Side-Menu Div End -->
+
+                <!-- Body-Content Div Start -->
+                <div id="layoutSidenav_content">
+                    <main>
+                        <!-- Page Title Div Start -->
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Fabric Edit
+                                            </h1>
+                                            <div class="">
+                                                <span class="font-weight-400 text-mute">Edit Fabric</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb mb-0 mt-4">
+                                        <li class="breadcrumb-item"><a href="/fabric-list">Fabric Management</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Fabric Edit</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Page Title Div End -->
+
+                        <!-- page content Start-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+
+                                        <!-- Title Add Div Start -->
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label">Fabric Name</label>
+                                            <input type="text" class="form-control" placeholder="Fabric Name"
+                                                id="fabricName" />
+                                        </div>
+                                        <!-- Title Add Div End -->
+
+                                        <!-- Select Category Div Start -->
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Fabric Category</label>
+                                            <select class="form-control" id="category">
+                                                <option selected disabled>Select Category</option>
+                                                <option value="body">Body Fabric</option>
+                                                <option value="sarong">Sarong Fabric</option>
+                                                <option value="shawl">Shawl Fabric</option>
+                                            </select>
+                                        </div>
+                                        <!-- Select Category Div End -->
+
+                                        <!-- Price Div Start -->
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Price</label>
+                                            <input type="number" class="form-control" placeholder="Enter Price"
+                                                id="price" />
+                                        </div>
+                                        <!-- Price Div End -->
+
+                                        <!-- Color Select Div Start -->
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Fabric Tiling</label>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input type="number" class="form-control" placeholder="wrapS"
+                                                        id="wrapS" min="0" />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="number" class="form-control" placeholder="wrapT"
+                                                        id="wrapT" min="0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Color Select Div End -->
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Update Fabric</h5>
+                                            <div class="d-flex justify-content-between">
+                                                <button class="btn btn-warning disabled  d-none" disabled>Preview</button>
+                                                <button onclick="updateFabric()" class="btn btn-primary"
+                                                    id="publish-btn">Publish</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Fabric image -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Fabric</h5>
+                                            <div id="imageContainer" class="border-radius-20 image-uploader-container"
+                                                onclick="openImageInput()">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/product-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: JPG, PNG</p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="fabricImage" accept="image/*" class="d-none" onchange="displayImage()">
+                                            <!-- Input Field Div End -->
+                                        </div>
+                                    </div>
+                                    <!-- Feature image -->
+
+                                    <!-- Fabric image -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="mb-3">Fabric Preview</h5>
+                                            <div id="imageContainer2" class="border-radius-20 image-uploader-container"
+                                                onclick="openImageInput2()">
+                                                <div class="row text-center p-4 image-uploader">
+                                                    <img src="/assets/img/product-image-uploade.png" class="mb-3" />
+                                                    <p class="mb-2 font-size-18">Drop your image here, or
+                                                        browse</p>
+                                                    <p class="mb-2 font-size-12 text-secondary">Supports: JPG, PNG</p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Input Field Div Start -->
+                                            <input type="file" id="fabricImage2" accept="image/*" class="d-none"
+                                                onchange="displayImage2()">
+                                            <!-- Input Field Div End -->
+                                        </div>
+                                    </div>
+                                    <!-- Feature image -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- page content End-->
+                    </main>
+
+
+                </div>
+                <!-- Body-Content Div End -->
+        </div>
+        <!-- Body Content Div End -->
+
+
+        <!-- Script Tag Start -->
+        <%- script_tags %>
+            <!-- Script Tag End -->
+
+            <script>
+                var currentUrl = window.location.href;
+                var parts = currentUrl.split('/');
+                var id = parts[parts.length - 1];
+
+                function disableBtn() {
+                    document.getElementById('publish-btn').disabled = true;
+                    document.getElementById('publish-btn').innerHTML = "Publishing...";
+                }
+
+                function enableBtn() {
+                    document.getElementById('publish-btn').disabled = false;
+                    document.getElementById('publish-btn').innerHTML = "Publish";
+                }
+
+                function openImageInput() {
+                    var input = document.getElementById('fabricImage');
+                    input.click();
+                }
+
+                function openImageInput2() {
+                    var input = document.getElementById('fabricImage2');
+                    input.click();
+                }
+
+                function displayImage() {
+                    const input = document.getElementById('fabricImage');
+                    const container = document.getElementById('imageContainer');
+
+                    const file = input.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            const image = new Image();
+                            image.src = e.target.result;
+                            image.className = "previewImage";
+                            container.innerHTML = '';
+
+                            image.style.width = '100%';
+                            image.style.height = '100%';
+
+                            container.appendChild(image);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                }
+
+                function displayImage2() {
+                    const input = document.getElementById('fabricImage2');
+                    const container = document.getElementById('imageContainer2');
+
+                    const file = input.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            const image = new Image();
+                            image.src = e.target.result;
+                            image.className = "previewImage2";
+                            container.innerHTML = '';
+
+                            image.style.width = '100%';
+                            image.style.height = '100%';
+
+                            container.appendChild(image);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                }
+
+                function viewData() {
+                    $.ajax({
+                        url: '/api/v1/fabric/view',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "id": id
+                        }),
+
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                $('#fabricName').val(data.data.name);
+                                $('#category').val(data.data.category);
+                                $('#price').val(data.data.price);
+                                $('#wrapS').val(data.data.wraps);
+                                $('#wrapT').val(data.data.wrapt);
+
+                                const container = document.getElementById('imageContainer');
+                                const image = new Image();
+                                image.src = data.data.fabric_image_url;
+                                image.className = "fabricImage";
+                                container.innerHTML = '';
+                                image.style.width = '100%';
+                                image.style.height = '100%';
+                                container.appendChild(image);
+
+                                const container2 = document.getElementById('imageContainer2');
+                                const image2 = new Image();
+                                image2.src = data.data.fabric_preview_image_url;
+                                image2.className = "fabricImage2";
+                                container2.innerHTML = '';
+                                image2.style.width = '100%';
+                                image2.style.height = '100%';
+                                container2.appendChild(image2);
+
+                            } else {
+                                console.log(data);
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                                
+                        },
+
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+                viewData()
+                
+                function updateFabric() {
+
+                    $.ajax({
+                        url: '/api/v1/fabric/edit',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "id": id,
+                            "name": $('#fabricName').val(),
+                            "category": $('#category').val(),
+                            "price": $('#price').val(),
+                            "wraps": $('#wrapS').val(),
+                            "wrapt": $('#wrapT').val(),
+                            "stichingColor": "",
+                            "btnColor": ""
+                        }),
+
+                        success: function (data) {
+                            if (data.status === true || data.status === "true") {
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                });
+
+                                fabricChange(id)
+
+                            } else {
+                                console.log(data);
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                            }
+                        },
+
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error making the request:', textStatus, errorThrown);
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'An error occurred while processing your request.',
+                            });
+                        }
+                    });
+                }
+
+                async function fabricChange(fabricId) {
+
+                    if (document.getElementById("fabricImage").files.length === 0) {
+                        fabricPreviewChange(fabricId)
+                        return;
+                    }
+
+                    let data = new FormData();
+                    data.append("imageId", 9);
+                    data.append("resultId", fabricId);
+                    data.append("image", document.getElementById("fabricImage").files[0]);
+
+                    $.ajax({
+                        url: "/api/upload",
+                        data: data,
+                        method: "post",
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+
+                            fabricPreviewChange(fabricId)
+
+                            var data = JSON.parse(data);
+                            if (data.status == "true" || data.status == true) {
+
+                                document.getElementById("fabricImage").value = '';
+
+                            } else {
+                                iziToast.error({
+                                    timeout: 5000,
+                                    icon: 'fa fa-ban',
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+
+                                enableBtn()
+
+                            }
+                        },
+
+                        error: function () {
+                            alert("Can not post data");
+                        }
+
+                    });
+
+                }
+
+                async function fabricPreviewChange(fabricId) {
+
+                    if (document.getElementById("fabricImage2").files.length === 0) {
+                        return;
+                    }
+
+                    let data = new FormData();
+                    data.append("imageId", 10);
+                    data.append("resultId", fabricId);
+                    data.append("image", document.getElementById("fabricImage2").files[0]);
+
+                    $.ajax({
+                        url: "/api/upload",
+                        data: data,
+                        method: "post",
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+
+                            // productSizeImageChange(productId)
+
+                            var data = JSON.parse(data);
+                            if (data.status == "true" || data.status == true) {
+
+                                document.getElementById("fabricImage2").value = '';
+
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'Done',
+                                    message: "Success",
+                                });
+                                setTimeout(() => { location.href = ""; }, 500)
+
+
+                            } else {
+                                iziToast.error({
+                                    timeout: 5000,
+                                    icon: 'fa fa-ban',
+                                    title: 'Error',
+                                    message: data.message,
+                                });
+                                enableBtn()
+                            }
+                        },
+
+                        error: function () {
+                            alert("Can not post data");
+                        }
+
+                    });
+
+                }
+
+
+            </script>
+
+
+</body>
+
+</html>

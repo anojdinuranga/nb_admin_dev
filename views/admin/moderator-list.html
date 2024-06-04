@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Moderator List</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="/assets/css/offcanvas.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
+    <%-header_tags %>
+</head>
+
+<body class="nav-fixed">
+    <%-top_header %>
+        <div id="layoutSidenav">
+            <%-sidebar %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <header class="page-header page-header-light bg-light ">
+                            <div class="container">
+                                <div class="page-header-content pt-4">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col-auto mt-4">
+                                            <h1 class="">
+                                                Moderator Management
+                                            </h1>
+                                            <div class="">
+                                                <!-- <span class="font-weight-400 text-mute">Manage Orders</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+                        <!-- Main page content-->
+                        <div class="container">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <span>Moderator List</span>
+                                    <a class="btn btn-primary" href="/moderator-add">Moderator Add</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="datatable">
+                                        <table class="table table-striped table-bordered table-hover" id="dataTable"
+                                            width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Email Address</th>
+                                                    <th>Mobile</th>
+                                                    <th>Address</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="newsletterListTable">
+                                                <% let counter=0; %>
+                                                <% moderatorList.forEach(function(item) { %>
+                                                    <% counter +=1; %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= counter %>
+                                                        </td>
+                                                        <td>
+                                                            <%= item.first_name %>
+                                                                <%= item.last_name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= item.email %>
+                                                        </td>
+                                                        <td>
+                                                            <%= item.mobile %>
+                                                        </td>
+                                                        <td>
+                                                            <%= item.address %>
+                                                        </td>
+                                                        <td>
+                                                            <% if(item.status === 1){ %>
+                                                                <span class="badge badge-success"></span>
+                                                                Active
+                                                                </span>
+                                                            <% } else { %>
+                                                                <span class="badge badge-warning"></span>
+                                                                Blocked
+                                                                </span>
+                                                            <% } %>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <% if(item.status === 1){ %>
+                                                                <button onclick="statusChange('<%= item.id %>', 2)"
+                                                                    class="btn btn-warning btn-sm"><i
+                                                                        class="fa-solid fa-ban"></i></button>
+                                                            <% } else { %>
+                                                                <button onclick="statusChange('<%= item.id %>', 1)"
+                                                                    class="btn btn-success btn-sm"><i
+                                                                        class="fa-solid fa-check"></i></button>
+                                                            <% } %>
+                                                            <a  href="/moderator-edit/<%= item.id %>"
+                                                                class="btn btn-dark btn-sm"><i
+                                                                    class="fa-solid fa-pen"></i></a>
+                                                            <button onclick="deleteData('<%= item.id %>')"
+                                                                class="btn btn-danger btn-sm"><i
+                                                                    class="fa-solid fa-trash-can"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                <% }); %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </main>
+
+
+                    <footer class="footer mt-auto footer-light">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 small">Copyright &copy; NB Admin 2023</div>
+                                <div class="col-md-6 text-md-right small">
+                                    <a href="#!">Privacy Policy</a>
+                                    &middot;
+                                    <a href="#!">Terms &amp; Conditions</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+        </div>
+
+        <%- script_tags %>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"
+                crossorigin="anonymous"></script>
+            <script src="assets/demo/datatables-demo.js"></script>
+            <script>
+                function statusChange(resultId, status) {
+                    iziToast.show({
+                        theme: 'dark',
+                        icon: 'fa-solid fa-xmark',
+                        title: 'Are you sure?',
+                        message: 'Do you want to cancel this order?',
+                        position: 'center',
+                        progressBarColor: 'rgb(0, 255, 184)',
+                        buttons: [
+                            ['<button>Yes</button>', function (instance, toast) {
+
+                                $.ajax({
+                                    url: "/api/v1/status_change/",
+                                    method: "post",
+                                    data: JSON.stringify({
+                                        tableId: 17,
+                                        resultId: resultId,
+                                        status: status
+                                    }),
+                                    dataType: "json",
+                                    contentType: "application/json",
+                                    success: async function (data) {
+                                        if (data.status) {
+
+                                            iziToast.success({
+                                                timeout: 5000,
+                                                icon: 'fa fa-check',
+                                                title: 'Done',
+                                                message: data.message,
+                                            });
+
+                                            location.href = '';
+
+                                        } else {
+
+                                            iziToast.error({
+                                                timeout: 5000,
+                                                icon: 'fa fa-ban',
+                                                title: 'Error',
+                                                message: data.message,
+                                            });
+
+                                        }
+                                    },
+                                    error: function (data) {
+
+                                        iziToast.error({
+                                            timeout: 5000,
+                                            icon: 'fa fa-ban',
+                                            title: 'Error',
+                                            message: data.statusText,
+                                        });
+
+                                    }
+                                });
+
+                                iziToast.hide({
+                                    transitionOut: 'fadeOutUp'
+                                }, toast);
+                            }, true],
+                            ['<button>No</button>', function (instance, toast) {
+                                iziToast.hide({
+                                    transitionOut: 'fadeOutUp'
+                                }, toast);
+                            }]
+                        ],
+                    });
+                }
+
+                function deleteData(resultId) {
+                    iziToast.show({
+                        theme: 'dark',
+                        icon: 'fa-solid fa-trash-can',
+                        title: 'Are you sure?',
+                        message: 'Do you want to delete this data?',
+                        position: 'center',
+                        progressBarColor: 'rgb(0, 255, 184)',
+                        buttons: [
+                            ['<button>Yes</button>', function (instance, toast) {
+
+                                $.ajax({
+                                    url: "/api/v1/delete_data",
+                                    method: "post",
+                                    data: JSON.stringify({
+                                        tableId: 17,
+                                        resultId: resultId
+                                    }),
+                                    dataType: "json",
+                                    contentType: "application/json",
+                                    success: async function (data) {
+                                        if (data.status) {
+
+                                            iziToast.success({
+                                                timeout: 5000,
+                                                icon: 'fa fa-check',
+                                                title: 'Done',
+                                                message: data.message,
+                                            });
+
+                                            location.href = '';
+
+                                        } else {
+
+                                            iziToast.error({
+                                                timeout: 5000,
+                                                icon: 'fa fa-ban',
+                                                title: 'Error',
+                                                message: data.message,
+                                            });
+
+                                        }
+                                    },
+                                    error: function (data) {
+
+                                        iziToast.error({
+                                            timeout: 5000,
+                                            icon: 'fa fa-ban',
+                                            title: 'Error',
+                                            message: data.statusText,
+                                        });
+
+                                    }
+                                });
+
+                                iziToast.hide({
+                                    transitionOut: 'fadeOutUp'
+                                }, toast);
+                            }, true],
+                            ['<button>No</button>', function (instance, toast) {
+                                iziToast.hide({
+                                    transitionOut: 'fadeOutUp'
+                                }, toast);
+                            }]
+                        ],
+                    });
+                }
+
+            </script>
+</body>
+
+</html>
